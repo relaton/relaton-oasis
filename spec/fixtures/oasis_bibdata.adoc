@@ -1,0 +1,37 @@
+[%bibitem]
+== {blank}
+id:: OASISamqp-core
+fetched:: 2022-03-17
+title.type:: main
+title.content:: Advanced Message Queueing Protocol (AMQP) v1.0
+title.language:: en
+title.script:: Latn
+title.format:: text/plain
+type:: standard
+docid.type:: OASIS
+docid.primary:: true
+docid.id:: OASIS amqp-core
+docnumber:: amqp-core
+language:: en
+script:: Latn
+date.type:: issued
+date.on:: 2019-01-01
+abstract.content:: Abstract paragraph 1.
+Abstract paragraph 2.
+abstract.language:: en
+abstract.script:: Latn
+abstract.format:: text/plain
+relation::
+relation.type:: hasPart
+relation.bibitem.doctype:: standard
+relation.bibitem.formattedref:: OASIS amqp-core-overview-v1.0-Pt0
+relation.bibitem.editorialgroup.technical_committee.name:: OASIS Advanced Message Queuing Protocol (AMQP) TC
+relation::
+relation.type:: hasPart
+relation.bibitem.doctype:: standard
+relation.bibitem.formattedref:: OASIS amqp-core-types-v1.0-Pt1
+relation.bibitem.editorialgroup.technical_committee.name:: OASIS Advanced Message Queuing Protocol (AMQP) TC
+doctype:: standard
+editorialgroup.technical_committee.name:: OASIS Advanced Message Queuing Protocol (AMQP) TC
+technology_area:: Content-Technologies
+technology_area:: eGov/Legal

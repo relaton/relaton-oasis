@@ -1,0 +1,225 @@
+= RelatonBipm: retrieve OASIS Standards for bibliographic use using the BibliographicItem model
+
+image:https://img.shields.io/gem/v/relaton-oasis.svg["Gem Version", link="https://rubygems.org/gems/relaton-oasis"]
+image:https://github.com/relaton/relaton-oasis/workflows/macos/badge.svg["Build Status (macOS)", link="https://github.com/relaton/relaton-oasis/actions?workflow=macos"]
+image:https://github.com/relaton/relaton-oasis/workflows/windows/badge.svg["Build Status (Windows)", link="https://github.com/relaton/relaton-oasis/actions?workflow=windows"]
+image:https://github.com/relaton/relaton-oasis/workflows/ubuntu/badge.svg["Build Status (Ubuntu)", link="https://github.com/relaton/relaton-oasis/actions?workflow=ubuntu"]
+image:https://codeclimate.com/github/relaton/relaton-oasis/badges/gpa.svg["Code Climate", link="https://codeclimate.com/github/relaton/relaton-oasis"]
+image:https://img.shields.io/github/issues-pr-raw/relaton/relaton-oasis.svg["Pull Requests", link="https://github.com/relaton/relaton-oasis/pulls"]
+image:https://img.shields.io/github/commits-since/relaton/relaton-oasis/latest.svg["Commits since latest",link="https://github.com/relaton/relaton-oasis/releases"]
+
+RelatonOasis is a Ruby gem that implements the https://github.com/metanorma/metanorma-model-iso#iso-bibliographic-item[IsoBibliographicItem model].
+
+You can use it to retrieve metadata of OASIS Standards from https://www.oasis-open.org/standards/ and access such metadata through the `OasisBibliographicItem` object.
+
+== Installation
+
+Add this line to your application's Gemfile:
+
+```ruby
+gem 'relaton-oasis'
+```
+
+And then execute:
+
+    $ bundle install
+
+Or install it yourself as:
+
+    $ gem install relaton-oasis
+
+== Usage
+
+=== Get standard using reference.
+
+All the OASIS documents are parsed from https://www.oasis-open.org/standards/ and stored into a GitHub repository https://github.com/relaton/relaton-data-oasis. You can find all possible refereces in the repository.
+
+[source,ruby]
+----
+require 'relaton-oasis'
+=> true
+
+item = RelatonOasis::OasisBibliography.get "OASIS amqp-core"
+[relaton-oasis] (OASIS amqp-core fetching...
+[relaton-oasis] (OASIS amqp-core) found OASIS amqp-core
+=> #<RelatonOasis::OasisBibliographicItem:0x00007fceea1aecb0
+...
+----
+
+=== XML serialization
+
+[source,ruby]
+----
+item.to_xml
+=> "<bibitem id="OASISamqp-core" type="standard">
+      <fetched>2022-03-17</fetched>
+      <title type="main" format="text/plain" language="en" script="Latn">Advanced Message Queueing Protocol (AMQP) v1.0</title>
+      <docidentifier type="OASIS" primary="true">OASIS amqp-core</docidentifier>
+      <docnumber>amqp-core</docnumber>
+      <date type="issued">
+        <on>2012-10-30</on>
+      </date>
+      <language>en</language>
+      <script>Latn</script>
+      <abstract format="text/plain" language="en" script="Latn">An open internet protocol for business messaging.</abstract>
+      <relation type="hasPart">
+        <bibitem>
+          <formattedref format="text/plain">OASIS amqp-core-overview-v1.0-Pt0</formattedref>
+        </bibitem>
+      </relation>
+      <relation type="hasPart">
+        <bibitem>
+          <formattedref format="text/plain">OASIS amqp-core-types-v1.0-Pt1</formattedref>
+        </bibitem>
+      </relation>
+      <relation type="hasPart">
+        <bibitem>
+          <formattedref format="text/plain">OASIS amqp-core-transport-v1.0-Pt2</formattedref>
+        </bibitem>
+      </relation>
+      <relation type="hasPart">
+        <bibitem>
+          <formattedref format="text/plain">OASIS amqp-core-messaging-v1.0-Pt3</formattedref>
+        </bibitem>
+      </relation>
+      <relation type="hasPart">
+        <bibitem>
+          <formattedref format="text/plain">OASIS amqp-core-transactions-v1.0-Pt4</formattedref>
+        </bibitem>
+      </relation>
+      <relation type="hasPart">
+        <bibitem>
+          <formattedref format="text/plain">OASIS amqp-core-security-v1.0-Pt5</formattedref>
+        </bibitem>
+      </relation>
+    </bibitem>"
+----
+
+With argument `bibdata: true` it ouputs XML wrapped by `bibdata` element and adds flavour `ext` element.
+
+[source,ruby]
+----
+item.to_xml bibdata: true
+=> "<bibdata type="standard">
+      <fetched>2022-03-17</fetched>
+      <title type="main" format="text/plain" language="en" script="Latn">Advanced Message Queueing Protocol (AMQP) v1.0</title>
+      <docidentifier type="OASIS" primary="true">OASIS amqp-core</docidentifier>
+      <docnumber>amqp-core</docnumber>
+      <date type="issued">
+        <on>2012-10-30</on>
+      </date>
+      <language>en</language>
+      <script>Latn</script>
+      <abstract format="text/plain" language="en" script="Latn">An open internet protocol for business messaging.</abstract>
+      <relation type="hasPart">
+        <bibitem>
+          <formattedref format="text/plain">OASIS amqp-core-overview-v1.0-Pt0</formattedref>
+        </bibitem>
+      </relation>
+      <relation type="hasPart">
+        <bibitem>
+          <formattedref format="text/plain">OASIS amqp-core-types-v1.0-Pt1</formattedref>
+        </bibitem>
+      </relation>
+      <relation type="hasPart">
+        <bibitem>
+          <formattedref format="text/plain">OASIS amqp-core-transport-v1.0-Pt2</formattedref>
+        </bibitem>
+      </relation>
+      <relation type="hasPart">
+        <bibitem>
+          <formattedref format="text/plain">OASIS amqp-core-messaging-v1.0-Pt3</formattedref>
+        </bibitem>
+      </relation>
+      <relation type="hasPart">
+        <bibitem>
+          <formattedref format="text/plain">OASIS amqp-core-transactions-v1.0-Pt4</formattedref>
+        </bibitem>
+      </relation>
+      <relation type="hasPart">
+        <bibitem>
+          <formattedref format="text/plain">OASIS amqp-core-security-v1.0-Pt5</formattedref>
+        </bibitem>
+      </relation>
+      <ext>
+        <doctype>standard</doctype>
+        <editorialgroup>
+          <technical-committee>OASIS Advanced Message Queuing Protocol (AMQP) TC</technical-committee>
+        </editorialgroup>
+        <technology-area>Messaging</technology-area>
+      </ext>
+    </bibdata>"
+----
+
+=== Typed links
+
+Some OASIS documents have `src` type link.
+
+[source,ruby]
+----
+item = RelatonOasis::OasisBibliography.get "OASIS amqp-core-types-v1.0-Pt1"
+[relaton-oasis] (OASIS amqp-core-types-v1.0-Pt1 fetching...
+[relaton-oasis] (OASIS amqp-core-types-v1.0-Pt1) found OASIS amqp-core-types-v1.0-Pt1
+=> #<RelatonOasis::OasisBibliographicItem:0x00007fceda0c5e08
+...
+
+item.link
+=> [#<RelatonBib::TypedUri:0x00007fceda0bf990
+  @content=#<Addressable::URI:0xbe00 URI:http://docs.oasis-open.org/amqp/core/v1.0/os/amqp-core-types-v1.0-os.html>,
+  @type="src">]
+----
+
+=== Create bibliographic item from XML
+
+[source,ruby]
+----
+RelatonOasis::XMLParser.from_xml File.read("spec/fixtures/oasis_bibdata.xml")
+=> #<RelatonOasis::OasisBibliographicItem:0x00007f88ab9d1d78
+...
+----
+
+=== Create bibliographic item from YAML
+[source,ruby]
+----
+hash = YAML.load_file "spec/fixtures/oasis_bibdata.yaml"
+=> {"id"=>"OASISamqp-core",
+...
+
+RelatonOasis::OasisBibliographicItem.from_hash hash
+=> #<RelatonOasis::OasisBibliographicItem:0x00007fceea0b6628
+...
+----
+
+=== Fetch data
+
+The OASIS documents can be fetched from https://www.oasis-open.org/standards/ and converted into RelatonXML/BibXML/BibYAML formats:
+
+The method `RelatonOasis::DataFetcher.fetch(output: "data", format: "yaml")` fethces and converts all the documents from the https://www.oasis-open.org/standards/ and save them to the `./data` folder in YAML format.
+
+Arguments:
+
+- `output` - folder to save documents (default './data').
+- `format` - format in which the documents are saved. Possimle formats are: `yaml`, `xml`, `bibxml` (default `yaml`).
+
+[source,ruby]
+----
+RelatonOasis::DataFetcher.fetch
+Started at: 2022-03-18 18:34:06 +0100
+Stopped at: 2022-03-18 18:34:12 +0100
+Done in: 5 sec.
+=> nil
+----
+
+== Development
+
+After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+
+To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and the created tag, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+
+== Contributing
+
+Bug reports and pull requests are welcome on GitHub at https://github.com/relaton/relaton-oasis.
+
+== License
+
+The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).

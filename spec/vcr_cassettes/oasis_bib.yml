@@ -1,0 +1,85 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://raw.githubusercontent.com/relaton/relaton-data-oasis/main/data/AKOMANTOSOCORE-V1.0-PT1-VOCABULARY.yaml
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip,deflate,identity
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Mechanize/2.8.4 Ruby/3.0.0p0 (http://github.com/sparklemotion/mechanize/)
+      Accept-Charset:
+      - ISO-8859-1,utf-8;q=0.7,*;q=0.7
+      Accept-Language:
+      - en-us,en;q=0.5
+      Host:
+      - raw.githubusercontent.com
+      Connection:
+      - keep-alive
+      Keep-Alive:
+      - '300'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '519'
+      Cache-Control:
+      - max-age=300
+      Content-Security-Policy:
+      - default-src 'none'; style-src 'unsafe-inline'; sandbox
+      Content-Type:
+      - text/plain; charset=utf-8
+      Etag:
+      - W/"76eedd84720968813899dfc58c422d1bb69705bc983f3b11f39c9ea6ab98ed01"
+      Strict-Transport-Security:
+      - max-age=31536000
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - deny
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Github-Request-Id:
+      - 4730:79DF:D6AB3:E489D:62337AF6
+      Content-Encoding:
+      - gzip
+      Accept-Ranges:
+      - bytes
+      Date:
+      - Thu, 17 Mar 2022 18:42:55 GMT
+      Via:
+      - 1.1 varnish
+      X-Served-By:
+      - cache-vie6375-VIE
+      X-Cache:
+      - HIT
+      X-Cache-Hits:
+      - '1'
+      X-Timer:
+      - S1647542575.012182,VS0,VE0
+      Vary:
+      - Authorization,Accept-Encoding,Origin
+      Access-Control-Allow-Origin:
+      - "*"
+      X-Fastly-Request-Id:
+      - 0516a128fa1c98c9099ee582dd71d131d4d8d7cf
+      Expires:
+      - Thu, 17 Mar 2022 18:47:55 GMT
+      Source-Age:
+      - '170'
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        H4sIAAAAAAAAA81UTWvbQBC961fszae1LPfQVLcQaCg4jalL6K2MpLG8eLUjdkem/vedlSxbNQRCW0N00n7Me/PeSE9rnZgqV8/3my+b+z018JUp0AN51IdsvtBrzvQLlVB0FvwxYcMW80QrPraYqwaMS5QqyTE6ztWsh1A9hnpBHww5JTBqDZ5VlqsfTyt1gZtJrQVXd1ALqFJaYYQLpTctDxsr4Li1Jd+AEDD+4rS1kdYat4+dnMl3zG2ephWVYU4QTNDUopuTr1OLNVg5aGwKe6dLkZdGeSmFtJXWMn04N3W+MRhAQV/fmO+4sdLU4EHwZXJ6Y3AV+CoRJjFVejtbq97g7QjYF8iq9aaRfRHtO4yYrmsK9PlbsCrgyZhMCB1WAnkA28l6tlxkd3pxp5efZkn0z5uiY/KxopWpkYvmK+WgweGtnwBO1xPjn8iZEk77f050vNvPdXgu0x0PTzPuDzs/JZl8WmuwjfHgzD/zeLLj11YZUf13or9Rjf7GmjfSl0y8fieSH8V+vrFkCY2amM27mbP80jeW/BkKQ/9f7QWoBxgLTwUeLbCJXowhEVPueSsIhSkMYzNwDMHLWHncjqznzl+Ntout16m9RS53WPUZtFzqxQedfZzFcLuKUMZy58hSffwJHiG2+TDQ6u/jkcEQtT3SIV3FgE9+AzXRCM7OBgAA
+    http_version:
+  recorded_at: Thu, 17 Mar 2022 18:42:54 GMT
+recorded_with: VCR 5.0.0
