@@ -41,7 +41,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "webmock"
 
   spec.add_dependency "mechanize"
-  spec.add_dependency "relaton-bib", "~> 1.10.0"
+  spec.add_dependency "relaton-bib", "~> 1.11.0"
 
   # For more information and examples about making a new gem, checkout our
   # guide at: https://bundler.io/guides/creating_gem.html
