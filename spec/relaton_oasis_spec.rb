@@ -18,8 +18,9 @@ RSpec.describe RelatonOasis do
       file = "spec/fixtures/document.xml"
       File.write file, xml, encoding: "UTF-8" unless File.exist? file
       expect(item).to be_instance_of RelatonOasis::OasisBibliographicItem
+      xml.gsub!(/<fetched>[\d-]+<\/fetched>/, "")
       expect(xml).to be_equivalent_to File.read(file, encoding: "UTF-8")
-        .gsub(/(?<=<fetched>)\d{4}-\d{2}-\d{2}/, Date.today.to_s)
+        .gsub(/<fetched>[\d-]+<\/fetched>/, "")
     end
   end
 
