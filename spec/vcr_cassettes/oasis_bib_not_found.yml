@@ -12,7 +12,7 @@ http_interactions:
       Accept:
       - "*/*"
       User-Agent:
-      - Mechanize/2.8.4 Ruby/3.0.0p0 (http://github.com/sparklemotion/mechanize/)
+      - Mechanize/2.8.5 Ruby/3.0.0p0 (http://github.com/sparklemotion/mechanize/)
       Accept-Charset:
       - ISO-8859-1,utf-8;q=0.7,*;q=0.7
       Accept-Language:
@@ -45,35 +45,33 @@ http_interactions:
       Content-Type:
       - text/plain; charset=utf-8
       X-Github-Request-Id:
-      - 63D2:721E:1B6261E:1C836B1:6250794B
-      Fastly-Original-Body-Size:
-      - '14'
+      - D8F4:917F:1BBF49:1D2813:62B5D6A1
       Accept-Ranges:
       - bytes
       Date:
-      - Fri, 08 Apr 2022 18:04:59 GMT
+      - Fri, 24 Jun 2022 15:22:09 GMT
       Via:
       - 1.1 varnish
       X-Served-By:
-      - cache-vie6325-VIE
+      - cache-vie6383-VIE
       X-Cache:
       - MISS
       X-Cache-Hits:
       - '0'
       X-Timer:
-      - S1649441100.628550,VS0,VE161
+      - S1656084130.828743,VS0,VE155
       Vary:
       - Authorization,Accept-Encoding,Origin
       Access-Control-Allow-Origin:
       - "*"
       X-Fastly-Request-Id:
-      - b4aa6f34427cbd99c577c72a10a14e213038eeb1
+      - 06f82e70fa715581a2b81e9f42070f50b97121c7
       Expires:
-      - Fri, 08 Apr 2022 18:09:59 GMT
+      - Fri, 24 Jun 2022 15:27:09 GMT
       Source-Age:
       - '0'
     body:
       encoding: UTF-8
       string: '404: Not Found'
-  recorded_at: Fri, 08 Apr 2022 18:04:59 GMT
+  recorded_at: Fri, 24 Jun 2022 15:22:09 GMT
 recorded_with: VCR 6.1.0
