@@ -14,13 +14,15 @@ RSpec.describe RelatonOasis do
   it "get document" do
     VCR.use_cassette "oasis_bib" do
       item = RelatonOasis::OasisBibliography.get "AkomaNtosoCore-v1.0-Pt1-Vocabulary"
-      xml = item.to_xml bibdata: true
+      xml = item.to_xml(bibdata: true)
       file = "spec/fixtures/document.xml"
       File.write file, xml, encoding: "UTF-8" unless File.exist? file
       expect(item).to be_instance_of RelatonOasis::OasisBibliographicItem
-      xml.gsub!(/<fetched>[\d-]+<\/fetched>/, "")
       expect(xml).to be_equivalent_to File.read(file, encoding: "UTF-8")
-        .gsub(/<fetched>[\d-]+<\/fetched>/, "")
+        .gsub(/(?<=<fetched>)\d{4}-\d{2}-\d{2}(?=<\/fetched>)/, Date.today.to_s)
+      schema = Jing.new "grammars/relaton-oasis-compile.rng"
+      errors = schema.validate file
+      expect(errors).to eq []
     end
   end
 

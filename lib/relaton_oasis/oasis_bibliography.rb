@@ -15,6 +15,7 @@ module RelatonOasis
         return unless resp.code == "200"
 
         hash = YAML.safe_load resp.body
+        hash["fetched"] = Date.today.to_s
         OasisBibliographicItem.from_hash hash
       rescue Mechanize::ResponseCodeError => e
         return if e.response_code == "404"

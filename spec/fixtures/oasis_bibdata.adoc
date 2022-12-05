@@ -1,7 +1,6 @@
 [%bibitem]
 == {blank}
 id:: OASISamqp-core
-fetched:: 2022-03-17
 title.type:: main
 title.content:: Advanced Message Queueing Protocol (AMQP) v1.0
 title.language:: en

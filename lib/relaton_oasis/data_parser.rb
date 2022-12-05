@@ -22,7 +22,6 @@ module RelatonOasis
     #
     def parse # rubocop:disable Metrics/MethodLength
       RelatonOasis::OasisBibliographicItem.new(
-        fetched: Date.today.to_s,
         type: "standard",
         doctype: parse_doctype,
         title: parse_title,

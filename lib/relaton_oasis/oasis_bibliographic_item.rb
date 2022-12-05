@@ -22,6 +22,10 @@ module RelatonOasis
       super
     end
 
+    # def ext_schema
+    #   @ext_schema ||= schema_versions["relaton-model-oasis"]
+    # end
+
     # @param hash [Hash]
     # @return [RelatonBipm::BipmBibliographicItem]
     def self.from_hash(hash)
@@ -54,9 +58,10 @@ module RelatonOasis
     #
     # Render bibliographic item as Hash.
     #
+    # @param embedded [Boolean] true if embedded in another document
     # @return [Hash] bibliographic item as Hash
     #
-    def to_hash
+    def to_hash(embedded: false)
       hash = super
       hash["technology_area"] = technology_area if technology_area.any?
       hash
