@@ -51,6 +51,8 @@ relation:
 doctype: standard
 editorialgroup:
 - name: OASIS Advanced Message Queuing Protocol (AMQP) TC
+ext:
+  schema-version: v1.0.0
 technology_area:
 - Content-Technologies
 - eGov/Legal

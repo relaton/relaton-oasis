@@ -22,6 +22,15 @@ module RelatonOasis
       super
     end
 
+    #
+    # Fetsh flavor schema version.
+    #
+    # @return [String] flavor schema version
+    #
+    def ext_schema
+      @ext_schema ||= schema_versions["relaton-model-oasis"]
+    end
+
     # def ext_schema
     #   @ext_schema ||= schema_versions["relaton-model-oasis"]
     # end
@@ -46,11 +55,12 @@ module RelatonOasis
     def to_xml(**opts)
       super(**opts) do |b|
         if opts[:bibdata] && technology_area.any?
-          b.ext do
+          ext = b.ext do
             b.doctype doctype if doctype
             editorialgroup&.to_xml b
             technology_area.each { |ta| b.send :"technology-area", ta }
           end
+          ext["schema-version"] = ext_schema unless opts[:embedded]
         end
       end
     end

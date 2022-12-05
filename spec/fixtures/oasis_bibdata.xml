@@ -19,7 +19,7 @@ Abstract paragraph 2.</abstract>
       <formattedref format="text/plain">OASIS amqp-core-types-v1.0-Pt1</formattedref>
     </bibitem>
   </relation>
-  <ext>
+  <ext schema-version="v1.0.0">
     <doctype>standard</doctype>
     <editorialgroup>
       <technical-committee>OASIS Advanced Message Queuing Protocol (AMQP) TC</technical-committee>
