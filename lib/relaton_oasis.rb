@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require "mechanize"
-require "jing"
 require "relaton_bib"
 require_relative "relaton_oasis/version"
 require_relative "relaton_oasis/oasis_bibliographic_item"

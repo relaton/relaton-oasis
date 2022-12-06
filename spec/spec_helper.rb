@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "jing"
+
 Dir["./spec/support/**/*.rb"].sort.each { |f| require f }
 
 require "relaton_oasis"
