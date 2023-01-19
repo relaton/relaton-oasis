@@ -32,7 +32,7 @@ Or install it yourself as:
 
 === Get standard using reference.
 
-All the OASIS documents are parsed from https://www.oasis-open.org/standards/ and stored in a GitHub repository https://github.com/relaton/relaton-data-oasis. You can find all possible references in the repository.
+All the OASIS documents are parsed from https://www.oasis-open.org/standards/ and stored in a GitHub repository https://github.com/relaton/relaton-data-oasis. You can find all possible references on the index page https://relaton.github.io/relaton-data-oasis/.
 
 [source,ruby]
 ----
