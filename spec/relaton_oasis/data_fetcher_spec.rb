@@ -12,7 +12,6 @@ describe RelatonOasis::DataFetcher do
   end
 
   it "create output dir and run fetcher" do
-    expect(Dir).to receive(:exist?).with("dir").and_return(false)
     expect(FileUtils).to receive(:mkdir_p).with("dir")
     fetcher = double("fetcher")
     expect(fetcher).to receive(:fetch)
@@ -40,6 +39,7 @@ describe RelatonOasis::DataFetcher do
     part_parser = double "part_parser"
     expect(part_parser).to receive(:parse).and_return(:bibitem).twice
     expect(RelatonOasis::DataPartParser).to receive(:new).with(kind_of(Nokogiri::XML::Element)).and_return(part_parser).twice
+    expect(subject.instance_variable_get(:@index)).to receive(:save)
     subject.fetch
   end
 
@@ -53,6 +53,8 @@ describe RelatonOasis::DataFetcher do
     it "xml" do
       subject.instance_variable_set :@format, "xml"
       expect(doc).to receive(:to_xml).with(bibdata: true).and_return("<xml/>")
+      index = subject.instance_variable_get(:@index)
+      expect(index).to receive(:[]=).with(doc, "file")
       expect(File).to receive(:write).with("file", "<xml/>", encoding: "UTF-8")
       subject.save_doc doc
       files = subject.instance_variable_get(:@files)
@@ -61,6 +63,8 @@ describe RelatonOasis::DataFetcher do
 
     it "yaml" do
       expect(doc).to receive(:to_hash).and_return(:hash)
+      index = subject.instance_variable_get(:@index)
+      expect(index).to receive(:[]=).with(doc, "file")
       expect(File).to receive(:write).with("file", :hash.to_yaml, encoding: "UTF-8")
       subject.save_doc doc
     end
@@ -68,6 +72,8 @@ describe RelatonOasis::DataFetcher do
     it "bibxml" do
       subject.instance_variable_set :@format, "bibxml"
       expect(doc).to receive(:to_bibxml).and_return("<xml/>")
+      index = subject.instance_variable_get(:@index)
+      expect(index).to receive(:[]=).with(doc, "file")
       expect(File).to receive(:write).with("file", "<xml/>", encoding: "UTF-8")
       subject.save_doc doc
     end

@@ -11,6 +11,7 @@ module RelatonOasis
       @format = format
       @ext = @format.sub(/^bib|^rfc/, "")
       @files = []
+      @index = Index.new
     end
 
     #
@@ -22,7 +23,7 @@ module RelatonOasis
     def self.fetch(output: "data", format: "yaml")
       t1 = Time.now
       puts "Started at: #{t1}"
-      FileUtils.mkdir_p output unless Dir.exist? output
+      FileUtils.mkdir_p output
       new(output, format).fetch
       t2 = Time.now
       puts "Stopped at: #{t2}"
@@ -40,6 +41,7 @@ module RelatonOasis
         save_doc DataParser.new(item).parse
         fetch_parts item
       end
+      @index.save
     end
 
     #
@@ -72,6 +74,7 @@ module RelatonOasis
         warn "File #{file} already exists. Document: #{doc.docnumber}"
       else
         @files << file
+        @index[doc] = file
       end
       File.write file, c, encoding: "UTF-8"
     end

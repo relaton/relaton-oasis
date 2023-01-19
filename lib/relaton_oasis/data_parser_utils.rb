@@ -1,4 +1,5 @@
 module RelatonOasis
+  # Common methods for document and part parsers.
   module DataParserUtils
     #
     # Parse document identifier specification.

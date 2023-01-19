@@ -1,4 +1,5 @@
 module RelatonOasis
+  # Parser for OASIS part document.
   class DataPartParser
     include RelatonOasis::DataParserUtils
 

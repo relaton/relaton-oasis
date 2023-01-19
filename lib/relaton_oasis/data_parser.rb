@@ -1,4 +1,5 @@
 module RelatonOasis
+  # Parser for OASIS document.
   class DataParser
     include RelatonOasis::DataParserUtils
 
@@ -106,7 +107,7 @@ module RelatonOasis
     end
 
     #
-    # Parse document part references.
+    # Look for "Cite as" references.
     #
     # @return [Array<String>] document part references
     #

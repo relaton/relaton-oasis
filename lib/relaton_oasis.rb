@@ -11,6 +11,7 @@ require_relative "relaton_oasis/data_fetcher"
 require_relative "relaton_oasis/data_parser_utils"
 require_relative "relaton_oasis/data_parser"
 require_relative "relaton_oasis/data_part_parser"
+require_relative "relaton_oasis/index"
 
 module RelatonOasis
   class Error < StandardError; end
