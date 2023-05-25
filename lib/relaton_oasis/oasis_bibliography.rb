@@ -3,21 +3,26 @@
 module RelatonOasis
   # Class methods for search Cenelec standards.
   class OasisBibliography
-    ENDPOINT = "https://raw.githubusercontent.com/relaton/relaton-data-oasis/main/data/"
+    ENDPOINT = "https://raw.githubusercontent.com/relaton/relaton-data-oasis/main/"
+    INDEX_FILE = "index-v1.yaml"
 
     class << self
       # @param text [String]
       # @return [RelatonOasis::HitCollection]
       def search(text, _year = nil)
         /^(?:OASIS\s)?(?<code>.+)/ =~ text
+        index = Relaton::Index.find_or_create :oasis, url: "#{ENDPOINT}index-v1.zip", file: INDEX_FILE
+        row = index.search(code).min_by { |i| i[:id] }
+        return unless row
+
         agent = Mechanize.new
-        resp = agent.get "#{ENDPOINT}#{code.upcase}.yaml"
+        resp = agent.get "#{ENDPOINT}#{row[:file]}"
         return unless resp.code == "200"
 
         hash = YAML.safe_load resp.body
         hash["fetched"] = Date.today.to_s
         OasisBibliographicItem.from_hash hash
-      rescue Mechanize::ResponseCodeError => e
+      rescue Mechanize::ResponseCodeError, OpenURI::HTTPError => e
         return if e.response_code == "404"
 
         raise RelatonBib::RequestError, e.message

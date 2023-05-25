@@ -27,11 +27,9 @@ RSpec.describe RelatonOasis do
   end
 
   it "not found" do
-    VCR.use_cassette "oasis_bib_not_found" do
-      expect do
-        resp = RelatonOasis::OasisBibliography.get "invalid"
-        expect(resp).to be_nil
-      end.to output(/not found/).to_stderr
-    end
+    expect do
+      resp = RelatonOasis::OasisBibliography.get "invalid"
+      expect(resp).to be_nil
+    end.to output(/not found/).to_stderr
   end
 end
