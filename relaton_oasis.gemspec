@@ -8,10 +8,10 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Ribose Inc."]
   spec.email         = ["open.source@ribose.com"]
 
-  spec.summary       = "RelatonOasis: retrieve OASIS Standards for bibliographic use "\
-                       "using the BibliographicItem model"
-  spec.description   = "RelatonOasis: retrieve OASIS Standards for bibliographic use "\
-                       "using the BibliographicItem model"
+  spec.summary       = "RelatonOasis: retrieve OASIS Standards for " \
+                       "bibliographic use using the BibliographicItem model"
+  spec.description   = "RelatonOasis: retrieve OASIS Standards for " \
+                       "bibliographic use using the BibliographicItem model"
   spec.homepage      = "https://github.com/metanorma/relaton-oasis"
   spec.license       = "BSD-2-Clause"
   spec.required_ruby_version = ">= 2.7.0"
@@ -34,6 +34,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "mechanize", "~> 2.8.0"
   spec.add_dependency "multi_json", "~> 1.15.0"
   spec.add_dependency "relaton-bib", "~> 1.14.0"
+  spec.add_dependency "relaton-index", "~> 0.2.0"
 
   # For more information and examples about making a new gem, checkout our
   # guide at: https://bundler.io/guides/creating_gem.html

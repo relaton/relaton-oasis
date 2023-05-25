@@ -12,6 +12,7 @@ module RelatonOasis
       @ext = @format.sub(/^bib|^rfc/, "")
       @files = []
       @index = Index.new
+      @index1 = Relaton::Index.find_or_create :oasis, file: "index-v1.yaml"
     end
 
     #
@@ -42,6 +43,7 @@ module RelatonOasis
         fetch_parts item
       end
       @index.save
+      @index1.save
     end
 
     #
@@ -76,6 +78,7 @@ module RelatonOasis
         @files << file
         @index[doc] = file
       end
+      @index1.add_or_update doc.docnumber, file
       File.write file, c, encoding: "UTF-8"
     end
 
