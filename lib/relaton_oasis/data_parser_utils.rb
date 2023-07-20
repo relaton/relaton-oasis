@@ -27,11 +27,10 @@ module RelatonOasis
     def parse_part(docid)
       return docid if docid.match?(/(?:Part|Pt)\d+/i)
 
-      id = case @title
-           when /Part\s(\d+)/ then "#{docid}-Pt#{$1}"
-           else docid
-           end
-      parse_errata(id)
+      case @title
+      when /Part\s(\d+)/ then "#{docid}-Pt#{$1}"
+      else docid
+      end
     end
 
     #
@@ -42,11 +41,11 @@ module RelatonOasis
     # @return [String] document identifier with errata if needed
     #
     def parse_errata(id)
-      return id if id.match?(/errata\d+/i)
+      return id.sub("errata", "Errata") if id.match?(/errata\d+/i)
 
       case @title
-      when /Plus\sErrata\s(\d+)/ then "#{id}-plus-errata#{$1}"
-      when /Errata\s(\d+)/ then "#{id}-errata#{$1}"
+      when /Plus\sErrata\s(\d+)/ then "#{id}-plus-Errata#{$1}"
+      when /Errata\s(\d+)/ then "#{id}-Errata#{$1}"
       else id
       end
     end

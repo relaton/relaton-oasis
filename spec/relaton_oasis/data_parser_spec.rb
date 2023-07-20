@@ -243,4 +243,11 @@ describe RelatonOasis::DataParser do
     rel = subject.parse_relation
     expect(rel).to be_a Array
   end
+
+  it "parses document with multiple parts" do
+    doc = Nokogiri::HTML File.read("spec/fixtures/odata-json-format-40.html", encoding: "UTF-8")
+    dp = described_class.new doc.at("//details")
+    bib = dp.parse
+    expect(bib.docidentifier[0].id).to eq "OASIS OData-JSON-Format-v4.0"
+  end
 end

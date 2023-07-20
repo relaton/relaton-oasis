@@ -140,7 +140,7 @@ module RelatonOasis
     # @return [String] document identifier
     #
     def parts_to_docid(parts)
-      id = parts[1..-1].each_with_object(parts[0].split("-")) do |part, acc|
+      id = parts[1..].each_with_object(parts[0].split("-")) do |part, acc|
         chunks = part.split "-"
         chunks.each.with_index do |chunk, idx|
           unless chunk.casecmp(acc[idx])&.zero?

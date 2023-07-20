@@ -63,7 +63,7 @@ module RelatonOasis
     #
     # Save document to file
     #
-    # @param [RelatonOasis::OasisBibliographicItem] doc 
+    # @param [RelatonOasis::OasisBibliographicItem] doc
     #
     def save_doc(doc) # rubocop:disable Metrics/MethodLength
       c = case @format

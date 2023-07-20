@@ -142,7 +142,7 @@ describe RelatonOasis::DataPartParser do
       EOHTML
       parser = RelatonOasis::DataPartParser.new doc.at("//p")
       docid = parser.parse_docid
-      expect(docid[0].id).to eq "OASIS BIASPROFILE-errata02"
+      expect(docid[0].id).to eq "OASIS BIASPROFILE-Errata02"
     end
 
     it "plus errata" do
@@ -154,7 +154,7 @@ describe RelatonOasis::DataPartParser do
       EOHTML
       parser = RelatonOasis::DataPartParser.new doc.at("//p")
       docid = parser.parse_docid
-      expect(docid[0].id).to eq "OASIS BIASPROFILE-plus-errata02"
+      expect(docid[0].id).to eq "OASIS BIASPROFILE-plus-Errata02"
     end
   end
 
@@ -209,5 +209,25 @@ describe RelatonOasis::DataPartParser do
     expect(ta.size).to eq 2
     expect(ta[0]).to eq "Content-Technologies"
     expect(ta[1]).to eq "eGov/Legal"
+  end
+
+  context "parse parts" do
+    let(:doc) do
+      html = File.read "spec/fixtures/odata-json-format-40.html", encoding: "UTF-8"
+      Nokogiri::HTML(html).at("//details")
+    end
+
+    it do
+      parts = doc.xpath("./div/div/div[contains(@class, 'standard__grid--cite-as')]" \
+                        "/p[strong or span/strong]").map do |part|
+        described_class.new(part).parse
+      end
+      expect(parts.size).to eq 5
+      expect(parts[0].docidentifier[0].id).to eq "OASIS OData-JSON-Format-v4.0-Pt"
+      expect(parts[1].docidentifier[0].id).to eq "OASIS OData-JSON-Format-v4.0-plus-Errata01"
+      expect(parts[2].docidentifier[0].id).to eq "OASIS OData-JSON-Format-v4.0-plus-Errata02"
+      expect(parts[3].docidentifier[0].id).to eq "OASIS OData-JSON-Format-v4.0-Errata03"
+      expect(parts[4].docidentifier[0].id).to eq "OASIS OData-JSON-Format-v4.0-plus-Errata03"
+    end
   end
 end

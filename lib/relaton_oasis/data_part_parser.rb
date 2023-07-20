@@ -61,9 +61,10 @@ module RelatonOasis
     def parse_docnumber
       ref = @node.at("./span[@class='citationLabel']/strong|./strong|b/span")
       num = ref.text.match(/[^\[\]]+/).to_s
+      id = parse_errata(num)
       # some part references need to be added by "Pt" to be distinguishable from root doc
-      num += "-Pt" if %w[CMIS-v1.1 DocBook-5.0 XACML-V3.0 mqtt-v3.1.1 OData-JSON-Format-v4.0].include?(num)
-      parse_spec num
+      id += "-Pt" if %w[CMIS-v1.1 DocBook-5.0 XACML-V3.0 mqtt-v3.1.1 OData-JSON-Format-v4.0].include?(id)
+      parse_spec id
     end
 
     #
