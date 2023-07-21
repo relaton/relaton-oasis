@@ -1,46 +1,6 @@
 describe RelatonOasis::DataParser do
   let(:node) do
-    Nokogiri::HTML <<-EOHTML
-    <details>
-      <summary>
-        <div class="standard__preview">
-          <h2>Advanced Message Queueing Protocol (AMQP) v1.0</h2>
-          <time class="standard__date">01 Jan 2019</time>
-          <div class="standard__description">
-            <p>Abstract paragraph 1. </p>
-            <p>Abstract paragraph 2.</p>
-            <ul class="technology-areas__list">
-              <li class="technology-areas__item">
-                <a href="http://www.oasis-open.org/filter">
-                  Content Technologies
-                </a>
-              </li>
-              <li class="technology-areas__item">
-                <a href="http://www.oasis-open.org/filter">
-                  eGov/Legal
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </summary>
-      <div class="standard__details">
-        <a href="http://www.oasis-open.org/committees/amqp/"> OASIS Advanced Message Queuing Protocol (AMQP) TC	</a>
-        <div class="standard__grid">
-          <div class="standard__grid--cite-as">
-            <p>
-              <strong>[amqp-core-overview-v1.0]</strong>
-              <span class="citationTitle">Advanced Message Queueing Protocol (AMQP) v1.0 Part 0: Overview</span>
-            </p>
-            <p>
-              [<b><span class="abbrev">amqp-core-types-v1.0</span></b>]
-              <span class="citeTitle">Advanced Message Queueing Protocol (AMQP) v1.0 Part 1: Types</span>
-            </p>
-          </div>
-        </div>
-      </div>
-    </details>
-    EOHTML
+    Nokogiri::HTML File.read("spec/fixtures/amqp-v10.html", encoding: "UTF-8")
   end
 
   subject { RelatonOasis::DataParser.new(node.at("//details")) }
@@ -216,7 +176,7 @@ describe RelatonOasis::DataParser do
     date = subject.parse_date
     expect(date).to be_a Array
     expect(date[0]).to be_a RelatonBib::BibliographicDate
-    expect(date[0].on).to eq "2019-01-01"
+    expect(date[0].on).to eq "2012-10-30"
     expect(date[0].type).to eq "issued"
   end
 
@@ -224,7 +184,7 @@ describe RelatonOasis::DataParser do
     abstract = subject.parse_abstract
     expect(abstract).to be_a Array
     expect(abstract[0]).to be_a RelatonBib::FormattedString
-    expect(abstract[0].content).to eq "Abstract paragraph 1.\nAbstract paragraph 2."
+    expect(abstract[0].content).to eq "An open internet protocol for business messaging."
     expect(abstract[0].format).to eq "text/plain"
     expect(abstract[0].language).to eq ["en"]
     expect(abstract[0].script).to eq ["Latn"]
@@ -242,6 +202,24 @@ describe RelatonOasis::DataParser do
   it "parses relation" do
     rel = subject.parse_relation
     expect(rel).to be_a Array
+  end
+
+  it "parses link" do
+    html = File.read("spec/fixtures/mqtt-v50.html", encoding: "UTF-8")
+    doc = Nokogiri::HTML(html).at("//details")
+    dp = described_class.new doc
+    link = dp.parse_link
+    expect(link).to be_a Array
+    expect(link.size).to eq 3
+    expect(link[0]).to be_a RelatonBib::TypedUri
+    expect(link[0].content.to_s).to eq "http://docs.oasis-open.org/mqtt/mqtt/v5.0/os/mqtt-v5.0-os.html"
+    expect(link[0].type).to eq "src"
+    expect(link[1]).to be_a RelatonBib::TypedUri
+    expect(link[1].content.to_s).to eq "http://docs.oasis-open.org/mqtt/mqtt/v5.0/os/mqtt-v5.0-os.pdf"
+    expect(link[1].type).to eq "pdf"
+    expect(link[2]).to be_a RelatonBib::TypedUri
+    expect(link[2].content.to_s).to eq "http://docs.oasis-open.org/mqtt/mqtt/v5.0/os/mqtt-v5.0-os.docx"
+    expect(link[2].type).to eq "doc"
   end
 
   it "parses document with multiple parts" do

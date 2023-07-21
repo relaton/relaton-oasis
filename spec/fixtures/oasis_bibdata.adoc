@@ -14,9 +14,8 @@ docnumber:: amqp-core
 language:: en
 script:: Latn
 date.type:: issued
-date.on:: 2019-01-01
-abstract.content:: Abstract paragraph 1.
-Abstract paragraph 2.
+date.on:: 2012-10-30
+abstract.content:: An open internet protocol for business messaging.
 abstract.language:: en
 abstract.script:: Latn
 abstract.format:: text/plain
@@ -30,7 +29,26 @@ relation.type:: hasPart
 relation.bibitem.doctype:: standard
 relation.bibitem.formattedref:: OASIS amqp-core-types-v1.0-Pt1
 relation.bibitem.editorialgroup.technical_committee.name:: OASIS Advanced Message Queuing Protocol (AMQP) TC
+relation::
+relation.type:: hasPart
+relation.bibitem.doctype:: standard
+relation.bibitem.formattedref:: OASIS amqp-core-transport-v1.0-Pt2
+relation.bibitem.editorialgroup.technical_committee.name:: OASIS Advanced Message Queuing Protocol (AMQP) TC
+relation::
+relation.type:: hasPart
+relation.bibitem.doctype:: standard
+relation.bibitem.formattedref:: OASIS amqp-core-messaging-v1.0-Pt3
+relation.bibitem.editorialgroup.technical_committee.name:: OASIS Advanced Message Queuing Protocol (AMQP) TC
+relation::
+relation.type:: hasPart
+relation.bibitem.doctype:: standard
+relation.bibitem.formattedref:: OASIS amqp-core-transactions-v1.0-Pt4
+relation.bibitem.editorialgroup.technical_committee.name:: OASIS Advanced Message Queuing Protocol (AMQP) TC
+relation::
+relation.type:: hasPart
+relation.bibitem.doctype:: standard
+relation.bibitem.formattedref:: OASIS amqp-core-security-v1.0-Pt5
+relation.bibitem.editorialgroup.technical_committee.name:: OASIS Advanced Message Queuing Protocol (AMQP) TC
 doctype:: standard
 editorialgroup.technical_committee.name:: OASIS Advanced Message Queuing Protocol (AMQP) TC
-technology_area:: Content-Technologies
-technology_area:: eGov/Legal
+technology_area:: Messaging

@@ -17,15 +17,13 @@ docid:
 docnumber: amqp-core
 date:
 - type: issued
-  value: '2019-01-01'
+  value: '2012-10-30'
 language:
 - en
 script:
 - Latn
 abstract:
-- content: |-
-    Abstract paragraph 1.
-    Abstract paragraph 2.
+- content: An open internet protocol for business messaging.
   language:
   - en
   script:
@@ -48,11 +46,42 @@ relation:
     doctype: standard
     editorialgroup:
     - name: OASIS Advanced Message Queuing Protocol (AMQP) TC
+- type: hasPart
+  bibitem:
+    formattedref:
+      content: OASIS amqp-core-transport-v1.0-Pt2
+      format: text/plain
+    doctype: standard
+    editorialgroup:
+    - name: OASIS Advanced Message Queuing Protocol (AMQP) TC
+- type: hasPart
+  bibitem:
+    formattedref:
+      content: OASIS amqp-core-messaging-v1.0-Pt3
+      format: text/plain
+    doctype: standard
+    editorialgroup:
+    - name: OASIS Advanced Message Queuing Protocol (AMQP) TC
+- type: hasPart
+  bibitem:
+    formattedref:
+      content: OASIS amqp-core-transactions-v1.0-Pt4
+      format: text/plain
+    doctype: standard
+    editorialgroup:
+    - name: OASIS Advanced Message Queuing Protocol (AMQP) TC
+- type: hasPart
+  bibitem:
+    formattedref:
+      content: OASIS amqp-core-security-v1.0-Pt5
+      format: text/plain
+    doctype: standard
+    editorialgroup:
+    - name: OASIS Advanced Message Queuing Protocol (AMQP) TC
 doctype: standard
 editorialgroup:
 - name: OASIS Advanced Message Queuing Protocol (AMQP) TC
 ext:
   schema-version: v1.0.0
 technology_area:
-- Content-Technologies
-- eGov/Legal
+- Messaging

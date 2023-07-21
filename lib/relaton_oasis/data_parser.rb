@@ -27,6 +27,7 @@ module RelatonOasis
         doctype: parse_doctype,
         title: parse_title,
         docid: parse_docid,
+        link: parse_link,
         docnumber: parse_docnumber,
         date: parse_date,
         abstract: parse_abstract,
@@ -116,6 +117,28 @@ module RelatonOasis
         ".standard__grid--cite-as > p > strong",
         "span.Refterm", "span.abbrev", "span.citationLabel > strong"
       ).map { |p| p.text.gsub(/^\[{1,2}|\]$/, "").strip }
+    end
+
+    def parse_link
+      return [] if parts.size > 1
+
+      links.map do |l|
+        type = l[:href].match(/\.(\w+)$/)&.captures&.first
+        type ||= "src"
+        type.sub!("docx", "doc")
+        type.sub!("html", "src")
+        RelatonBib::TypedUri.new(type: type, content: l[:href])
+      end
+    end
+
+    def parts
+      @node.xpath("./div/div/div[contains(@class, 'standard__grid--cite-as')]/p[strong or span/strong]")
+    end
+
+    def links
+      l = @node.xpath("./div/div/div[1]/p[1]/a[@href]")
+      l = @node.xpath("./div/div/div[1]/p[2]/a[@href]") if l.empty?
+      l
     end
 
     #
