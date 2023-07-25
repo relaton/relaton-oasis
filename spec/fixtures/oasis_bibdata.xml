@@ -5,6 +5,54 @@
   <date type="issued">
     <on>2012-10-30</on>
   </date>
+  <contributor>
+    <role type="editor"/>
+    <person>
+      <name>
+        <forename language="en" script="Latn">Robert</forename>
+        <surname language="en" script="Latn">Godfrey</surname>
+      </name>
+      <affiliation>
+        <organization>
+          <name>JPMorgan Chase &amp; Co.</name>
+          <url>http://www.jpmorganchase.com</url>
+        </organization>
+      </affiliation>
+      <email>robert.godfrey@jpmorgan.com</email>
+    </person>
+  </contributor>
+  <contributor>
+    <role type="editor"/>
+    <person>
+      <name>
+        <forename language="en" script="Latn">David</forename>
+        <surname language="en" script="Latn">Ingham</surname>
+      </name>
+      <affiliation>
+        <organization>
+          <name>Microsoft</name>
+          <url>http://www.microsoft.com</url>
+        </organization>
+      </affiliation>
+      <email>David.Ingham@microsoft.com</email>
+    </person>
+  </contributor>
+  <contributor>
+    <role type="editor"/>
+    <person>
+      <name>
+        <forename language="en" script="Latn">Rafael</forename>
+        <surname language="en" script="Latn">Schloming</surname>
+      </name>
+      <affiliation>
+        <organization>
+          <name>Red Hat</name>
+          <url>http://www.redhat.com</url>
+        </organization>
+      </affiliation>
+      <email>rafaels@redhat.com</email>
+    </person>
+  </contributor>
   <language>en</language>
   <script>Latn</script>
   <abstract format="text/plain" language="en" script="Latn">An open internet protocol for business messaging.</abstract>

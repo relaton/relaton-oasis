@@ -19,6 +19,36 @@ abstract.content:: An open internet protocol for business messaging.
 abstract.language:: en
 abstract.script:: Latn
 abstract.format:: text/plain
+contributor::
+contributor.person.given.forename.content:: Robert
+contributor.person.given.forename.language:: en
+contributor.person.given.forename.script:: Latn
+contributor.person.name.surname.content:: Godfrey
+contributor.person.name.surname.language:: en
+contributor.person.name.surname.script:: Latn
+contributor.person.affiliation.organization.name:: JPMorgan Chase & Co.
+contributor.person.contact.email:: robert.godfrey@jpmorgan.com
+contributor.role.type:: editor
+contributor::
+contributor.person.given.forename.content:: David
+contributor.person.given.forename.language:: en
+contributor.person.given.forename.script:: Latn
+contributor.person.name.surname.content:: Ingham
+contributor.person.name.surname.language:: en
+contributor.person.name.surname.script:: Latn
+contributor.person.affiliation.organization.name:: Microsoft
+contributor.person.contact.email:: David.Ingham@microsoft.com
+contributor.role.type:: editor
+contributor::
+contributor.person.given.forename.content:: Rafael
+contributor.person.given.forename.language:: en
+contributor.person.given.forename.script:: Latn
+contributor.person.name.surname.content:: Schloming
+contributor.person.name.surname.language:: en
+contributor.person.name.surname.script:: Latn
+contributor.person.affiliation.organization.name:: Red Hat
+contributor.person.contact.email:: rafaels@redhat.com
+contributor.role.type:: editor
 relation::
 relation.type:: hasPart
 relation.bibitem.doctype:: standard

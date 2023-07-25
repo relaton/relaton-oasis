@@ -1,47 +1,11 @@
 describe RelatonOasis::DataPartParser do
   let(:doc) do
-    Nokogiri::HTML <<-EOHTML
-    <details>
-      <summary>
-        <div class="standard__preview">
-          <h2>Advanced Message Queueing Protocol (AMQP) v1.0</h2>
-          <time class="standard__date">01 Jan 2019</time>
-          <div class="standard__description">
-            <p>An open internet protocol for business messaging. </p>
-            <ul class="technology-areas__list">
-              <li class="technology-areas__item">
-                <a href="http://www.oasis-open.org/filter">
-                  Content Technologies
-                </a>
-              </li>
-              <li class="technology-areas__item">
-                <a href="http://www.oasis-open.org/filter">
-                  eGov/Legal
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </summary>
-      <div class="standard__details>
-        <div class="standard__grid">
-          <div class="standard__grid--cite-as">
-            <p>
-              <strong>[amqp-core-overview-v1.0]</strong>
-              <span class="citationTitle">Title1</span>
-              . Edited by Robert Godfrey, David Ingham, and Rafael Schloming. 29 October 2012. OASIS Standard.
-              <a href="http://www.example.com/">Link</a>
-            </p>
-          </div>
-        </div>
-      </div>
-    </details>
-    EOHTML
+    Nokogiri::HTML File.read("spec/fixtures/amqp-v10.html", encoding: "UTF-8")
   end
 
-  subject { RelatonOasis::DataPartParser.new doc.at("//div[@class='standard__grid--cite-as']/p") }
+  subject { RelatonOasis::DataPartParser.new doc.at("//div[contains(@class, 'standard__grid--cite-as')]/p") }
 
-  context "initialize" do
+  context "#title" do
     it "with title in span" do
       doc = Nokogiri::HTML <<-EOHTML
         <p>
@@ -50,7 +14,7 @@ describe RelatonOasis::DataPartParser do
         </p>
       EOHTML
       parser = RelatonOasis::DataPartParser.new doc.at("//p")
-      expect(parser.instance_variable_get(:@title)).to eq "Title"
+      expect(parser.title).to eq "Title"
     end
 
     it "with title as a text node" do
@@ -61,7 +25,7 @@ describe RelatonOasis::DataPartParser do
         </p>
       EOHTML
       parser = RelatonOasis::DataPartParser.new doc.at("//p")
-      expect(parser.instance_variable_get(:@title)).to eq "Title."
+      expect(parser.title).to eq "Title."
     end
   end
 
@@ -72,7 +36,7 @@ describe RelatonOasis::DataPartParser do
     expect(subject).to receive(:parse_docnumber)
     expect(subject).to receive(:parse_date)
     expect(subject).to receive(:parse_relation)
-    expect(subject).to receive(:parse_contributor)
+    expect(subject).to receive(:parse_editors)
     expect(RelatonOasis::OasisBibliographicItem).to receive(:new)
     subject.parse
   end
@@ -128,7 +92,7 @@ describe RelatonOasis::DataPartParser do
       docid = subject.parse_docid
       expect(docid).to be_instance_of Array
       expect(docid[0]).to be_instance_of RelatonBib::DocumentIdentifier
-      expect(docid[0].id).to eq "OASIS amqp-core-overview-v1.0"
+      expect(docid[0].id).to eq "OASIS amqp-core-overview-v1.0-Pt0"
       expect(docid[0].type).to eq "OASIS"
       expect(docid[0].primary).to be true
     end
@@ -163,7 +127,7 @@ describe RelatonOasis::DataPartParser do
     expect(link).to be_instance_of Array
     expect(link.size).to eq 1
     expect(link[0]).to be_instance_of RelatonBib::TypedUri
-    expect(link[0].content.to_s).to eq "http://www.example.com/"
+    expect(link[0].content.to_s).to eq "http://docs.oasis-open.org/amqp/core/v1.0/os/amqp-core-overview-v1.0-os.html"
   end
 
   it "parse date" do
@@ -174,8 +138,8 @@ describe RelatonOasis::DataPartParser do
     expect(date[0].on).to eq "2012-10-29"
   end
 
-  it "parse contributor" do
-    contrib = subject.parse_contributor
+  it "parse contributor", vcr: "part_editors" do
+    contrib = subject.parse_editors
     expect(contrib).to be_instance_of Array
     expect(contrib.size).to eq 3
     expect(contrib[0]).to be_instance_of RelatonBib::ContributionInfo
@@ -186,10 +150,23 @@ describe RelatonOasis::DataPartParser do
     expect(contrib[0].entity).to be_instance_of RelatonBib::Person
     expect(contrib[0].entity.name.forename).to be_instance_of Array
     expect(contrib[0].entity.name.forename.size).to eq 1
-    expect(contrib[0].entity.name.forename[0]).to be_instance_of RelatonBib::LocalizedString
+    expect(contrib[0].entity.name.forename[0]).to be_instance_of RelatonBib::Forename
     expect(contrib[0].entity.name.forename[0].content).to eq "Robert"
     expect(contrib[0].entity.name.surname).to be_instance_of RelatonBib::LocalizedString
     expect(contrib[0].entity.name.surname.content).to eq "Godfrey"
+    expect(contrib[0].entity.contact).to be_instance_of Array
+    expect(contrib[0].entity.contact.size).to eq 1
+    expect(contrib[0].entity.contact[0]).to be_instance_of RelatonBib::Contact
+    expect(contrib[0].entity.contact[0].type).to eq "email"
+    expect(contrib[0].entity.contact[0].value).to eq "robert.godfrey@jpmorgan.com"
+    expect(contrib[0].entity.affiliation).to be_instance_of Array
+    expect(contrib[0].entity.affiliation.size).to eq 1
+    expect(contrib[0].entity.affiliation[0]).to be_instance_of RelatonBib::Affiliation
+    expect(contrib[0].entity.affiliation[0].organization).to be_instance_of RelatonBib::Organization
+    expect(contrib[1].entity.name.forename[0].content).to eq "David"
+    expect(contrib[1].entity.name.surname.content).to eq "Ingham"
+    expect(contrib[2].entity.name.forename[0].content).to eq "Rafael"
+    expect(contrib[2].entity.name.surname.content).to eq "Schloming"
   end
 
   it "parse relation" do
@@ -200,15 +177,14 @@ describe RelatonOasis::DataPartParser do
     expect(rel[0].type).to eq "partOf"
     expect(rel[0].bibitem).to be_instance_of RelatonOasis::OasisBibliographicItem
     expect(rel[0].bibitem.formattedref).to be_instance_of RelatonBib::FormattedRef
-    expect(rel[0].bibitem.formattedref.content).to eq "OASIS amqp-core-overview-v1.0"
+    expect(rel[0].bibitem.formattedref.content).to eq "OASIS amqp-core"
   end
 
   it "parse techology area" do
     ta = subject.parse_technology_area
     expect(ta).to be_instance_of Array
-    expect(ta.size).to eq 2
-    expect(ta[0]).to eq "Content-Technologies"
-    expect(ta[1]).to eq "eGov/Legal"
+    expect(ta.size).to eq 1
+    expect(ta[0]).to eq "Messaging"
   end
 
   context "parse parts" do
@@ -217,7 +193,7 @@ describe RelatonOasis::DataPartParser do
       Nokogiri::HTML(html).at("//details")
     end
 
-    it do
+    it "", vcr: "odata-json-format-40-parts" do
       parts = doc.xpath("./div/div/div[contains(@class, 'standard__grid--cite-as')]" \
                         "/p[strong or span/strong]").map do |part|
         described_class.new(part).parse

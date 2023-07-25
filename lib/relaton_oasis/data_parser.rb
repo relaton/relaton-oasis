@@ -10,10 +10,16 @@ module RelatonOasis
     #
     def initialize(node)
       @node = node
-      @title = @node.at("./summary/div/h2").text
-      @text = @node.at(
+    end
+
+    def title
+      @title ||= @node.at("./summary/div/h2").text
+    end
+
+    def text
+      @text ||= @node.at(
         "./div/div/div[contains(@class, 'standard__grid--cite-as')]/p[em or i or a or span]",
-      )&.text
+      )&.text&.strip
     end
 
     #
@@ -30,6 +36,7 @@ module RelatonOasis
         link: parse_link,
         docnumber: parse_docnumber,
         date: parse_date,
+        contributor: parse_editors,
         abstract: parse_abstract,
         language: ["en"],
         script: ["Latn"],
@@ -45,7 +52,7 @@ module RelatonOasis
     # @return [Array<RelatonBib::TypedTitleString>] <description>
     #
     def parse_title
-      [RelatonBib::TypedTitleString.new(type: "main", content: @title, language: "en", script: "Latn")]
+      [RelatonBib::TypedTitleString.new(type: "main", content: title, language: "en", script: "Latn")]
     end
 
     #
@@ -61,7 +68,7 @@ module RelatonOasis
       end
     end
 
-    #
+    # #
     # Parse abstract.
     #
     # @return [Array<RelatonBib::FormattedString>] abstract
@@ -132,7 +139,9 @@ module RelatonOasis
     end
 
     def parts
-      @node.xpath("./div/div/div[contains(@class, 'standard__grid--cite-as')]/p[strong or span/strong]")
+      @parts ||= @node.xpath(
+        "./div/div/div[contains(@class, 'standard__grid--cite-as')]/p[strong or span/strong]",
+      )
     end
 
     def links

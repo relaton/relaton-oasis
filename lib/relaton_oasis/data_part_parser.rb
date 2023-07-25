@@ -10,13 +10,21 @@ module RelatonOasis
     #
     def initialize(node)
       @node = node
-      @text = node.xpath(
+    end
+
+    def text
+      @text ||= @node.xpath(
         "./strong/following-sibling::text()|./span/strong/../following-sibling::text()",
       ).text.strip
+    end
+
+    def title
+      return @title if @title
+
       t = @node.at("./span[@class='citationTitle' or @class='citeTitle']|./em|./i")
       @title = if t then t.text
                else
-                 @text.match(/(?<content>.+)\s(?:Edited|\d{2}\s\w+\d{4})/)[:content]
+                 text.match(/(?<content>.+)\s(?:Edited|\d{2}\s\w+\d{4})/)[:content]
                end.strip
     end
 
@@ -39,7 +47,7 @@ module RelatonOasis
         script: ["Latn"],
         # editorialgroup: parse_editorialgroup,
         relation: parse_relation,
-        contributor: parse_contributor,
+        contributor: parse_editors,
         technology_area: parse_technology_area,
       )
     end
@@ -50,7 +58,7 @@ module RelatonOasis
     # @return [Array<RelatonBib::TypedTitleString>] title
     #
     def parse_title
-      [RelatonBib::TypedTitleString.new(type: "main", content: @title, language: "en", script: "Latn")]
+      [RelatonBib::TypedTitleString.new(type: "main", content: title, language: "en", script: "Latn")]
     end
 
     #
@@ -83,30 +91,14 @@ module RelatonOasis
     # @return [Array<RelatonBib::BibliographicDate>] bibliographic dates
     #
     def parse_date
-      /(?<on>\d{1,2}\s\w+\s\d{4})/ =~ @text
+      /(?<on>\d{1,2}\s\w+\s\d{4})/ =~ text
       [RelatonBib::BibliographicDate.new(on: Date.parse(on).to_s, type: "issued")]
     end
 
     # def parse_abstract
-    #   /\d{2}\s\w+\s\d{4}\.\s(?<content>.+)\sLatest\sversion/ =~ @text
+    #   /\d{2}\s\w+\s\d{4}\.\s(?<content>.+)\sLatest\sversion/ =~ text
     #   [RelatonBib::FormattedString.new(content: content, language: "en", script: "Latn")]
     # end
-
-    #
-    # Parse contributor.
-    #
-    # @return [Array<RelatonBib::ContributionInfo>] contributors
-    #
-    def parse_contributor
-      @text.match(/(?<=Edited\sby\s)[^.]+/).to_s.split(/,\s|,?\sand\s/).map do |c|
-        forename, surname = c.split
-        fn = RelatonBib::LocalizedString.new(forename, "en", "Latn")
-        sn = RelatonBib::LocalizedString.new(surname, "en", "Latn")
-        name = RelatonBib::FullName.new(surname: sn, forename: [fn])
-        entity = RelatonBib::Person.new(name: name)
-        RelatonBib::ContributionInfo.new(role: [type: "editor"], entity: entity)
-      end
-    end
 
     #
     # Parse relation.
