@@ -42,12 +42,12 @@ module RelatonOasis
         link: parse_link,
         docnumber: parse_docnumber,
         date: parse_date,
-        # abstract: parse_abstract,
+        abstract: parse_abstract,
         language: ["en"],
         script: ["Latn"],
-        # editorialgroup: parse_editorialgroup,
+        editorialgroup: parse_editorialgroup,
         relation: parse_relation,
-        contributor: parse_editors,
+        contributor: parse_contributor,
         technology_area: parse_technology_area,
       )
     end
@@ -95,10 +95,25 @@ module RelatonOasis
       [RelatonBib::BibliographicDate.new(on: Date.parse(on).to_s, type: "issued")]
     end
 
-    # def parse_abstract
-    #   /\d{2}\s\w+\s\d{4}\.\s(?<content>.+)\sLatest\sversion/ =~ text
-    #   [RelatonBib::FormattedString.new(content: content, language: "en", script: "Latn")]
-    # end
+    def parse_abstract
+      page.xpath("//p[preceding-sibling::p[starts-with(., 'Abstract')]][1]").map do |p|
+        cnt = p.text.gsub(/[\r\n]+/, " ").strip
+        RelatonBib::FormattedString.new(content: cnt, language: "en", script: "Latn")
+      end
+    end
+
+    #
+    # Parse technical committee.
+    #
+    # @return [RelatonBib::EditorialGroup] technical committee
+    #
+    def parse_editorialgroup
+      tc = page.xpath("//p[preceding-sibling::p[starts-with(., 'Technical')]][1]//a").map do |a|
+        wg = RelatonBib::WorkGroup.new name: a.text.strip
+        RelatonBib::TechnicalCommittee.new wg
+      end
+      RelatonBib::EditorialGroup.new tc
+    end
 
     #
     # Parse relation.
@@ -110,6 +125,20 @@ module RelatonOasis
       fref = RelatonBib::FormattedRef.new(content: parser.parse_docid[0].id)
       bib = RelatonOasis::OasisBibliographicItem.new(formattedref: fref)
       [RelatonBib::DocumentRelation.new(type: "partOf", bibitem: bib)]
+    end
+
+    def parse_publisher
+      return [] unless page
+
+      page.xpath("//p[preceding-sibling::p[starts-with(., 'Technical')]][1]//a").map do |a|
+        cnt = RelatonBib::Contact.new(type: "uri", value: a[:href])
+        org = RelatonBib::Organization.new name: a.text.gsub(/[\r\n]+/, " ").strip, contact: [cnt]
+        RelatonBib::ContributionInfo.new entity: org, role: [{ type: "publisher" }]
+      end
+    end
+
+    def link_node
+      @link_node = @node.at("./a")
     end
 
     #

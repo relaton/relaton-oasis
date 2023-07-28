@@ -6,6 +6,45 @@
     <on>2012-10-30</on>
   </date>
   <contributor>
+    <role type="publisher"/>
+    <organization>
+      <name>OASIS Advanced Message Queuing Protocol (AMQP) TC</name>
+      <uri>http://www.oasis-open.org/committees/amqp/</uri>
+    </organization>
+  </contributor>
+  <contributor>
+    <role type="authorizer"/>
+    <person>
+      <name>
+        <forename language="en" script="Latn">Ram</forename>
+        <surname language="en" script="Latn">Jeyaraman</surname>
+      </name>
+      <affiliation>
+        <organization>
+          <name>Microsoft</name>
+          <uri>http://www.microsoft.com</uri>
+        </organization>
+      </affiliation>
+      <email>Ram.Jeyaraman@microsoft.com</email>
+    </person>
+  </contributor>
+  <contributor>
+    <role type="authorizer"/>
+    <person>
+      <name>
+        <forename language="en" script="Latn">Angus</forename>
+        <surname language="en" script="Latn">Telfer</surname>
+      </name>
+      <affiliation>
+        <organization>
+          <name>INETCO Systems</name>
+          <uri>http://www.inetco.com</uri>
+        </organization>
+      </affiliation>
+      <email>angus.telfer@inetco.com</email>
+    </person>
+  </contributor>
+  <contributor>
     <role type="editor"/>
     <person>
       <name>
@@ -15,7 +54,7 @@
       <affiliation>
         <organization>
           <name>JPMorgan Chase &amp; Co.</name>
-          <url>http://www.jpmorganchase.com</url>
+          <uri>http://www.jpmorganchase.com</uri>
         </organization>
       </affiliation>
       <email>robert.godfrey@jpmorgan.com</email>
@@ -31,7 +70,7 @@
       <affiliation>
         <organization>
           <name>Microsoft</name>
-          <url>http://www.microsoft.com</url>
+          <uri>http://www.microsoft.com</uri>
         </organization>
       </affiliation>
       <email>David.Ingham@microsoft.com</email>
@@ -47,7 +86,7 @@
       <affiliation>
         <organization>
           <name>Red Hat</name>
-          <url>http://www.redhat.com</url>
+          <uri>http://www.redhat.com</uri>
         </organization>
       </affiliation>
       <email>rafaels@redhat.com</email>

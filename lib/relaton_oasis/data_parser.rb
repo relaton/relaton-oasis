@@ -36,7 +36,7 @@ module RelatonOasis
         link: parse_link,
         docnumber: parse_docnumber,
         date: parse_date,
-        contributor: parse_editors,
+        contributor: parse_contributor,
         abstract: parse_abstract,
         language: ["en"],
         script: ["Latn"],
@@ -93,6 +93,18 @@ module RelatonOasis
         RelatonBib::TechnicalCommittee.new wg
       end
       RelatonBib::EditorialGroup.new tc
+    end
+
+    def parse_publisher
+      @node.xpath("./div[@class='standard__details']/a").map do |a|
+        cnt = RelatonBib::Contact.new(type: "uri", value: a[:href])
+        org = RelatonBib::Organization.new name: a.text.strip, contact: [cnt]
+        RelatonBib::ContributionInfo.new entity: org, role: [{ type: "publisher" }]
+      end
+    end
+
+    def link_node
+      @link_node ||= @node.at("./div/div/div[contains(@class, 'standard__grid--cite-as')]/p[strong or span/strong]/a")
     end
 
     #

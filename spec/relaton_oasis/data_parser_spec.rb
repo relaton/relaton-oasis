@@ -234,56 +234,86 @@ describe RelatonOasis::DataParser do
 
   it "parses editors", vcr: "editors" do
     dp = described_class.new mqtt_v50
-    contrib = dp.parse_editors
+    contrib = dp.parse_contributor
     expect(contrib).to be_a Array
-    expect(contrib.size).to eq 4
+    expect(contrib.size).to eq 5
     expect(contrib[0]).to be_a RelatonBib::ContributionInfo
     expect(contrib[0].role).to be_a Array
     expect(contrib[0].role.size).to eq 1
     expect(contrib[0].role[0]).to be_a RelatonBib::ContributorRole
-    expect(contrib[0].role[0].type).to eq "editor"
-    expect(contrib[0].entity).to be_a RelatonBib::Person
-    expect(contrib[0].entity.name).to be_a RelatonBib::FullName
-    expect(contrib[0].entity.name.forename).to be_a Array
-    expect(contrib[0].entity.name.forename.size).to eq 1
-    expect(contrib[0].entity.name.forename[0]).to be_a RelatonBib::Forename
-    expect(contrib[0].entity.name.forename[0].content).to eq "Andrew"
-    expect(contrib[0].entity.name.surname).to be_a RelatonBib::LocalizedString
-    expect(contrib[0].entity.name.surname.content).to eq "Banks"
+    expect(contrib[0].role[0].type).to eq "publisher"
+    expect(contrib[0].entity).to be_a RelatonBib::Organization
+    expect(contrib[0].entity.name).to be_a Array
+    expect(contrib[0].entity.name.size).to eq 1
+    expect(contrib[0].entity.name[0]).to be_a RelatonBib::LocalizedString
+    expect(contrib[0].entity.name[0].content).to eq "OASIS Message Queuing Telemetry Transport (MQTT) TC"
     expect(contrib[0].entity.contact).to be_a Array
     expect(contrib[0].entity.contact.size).to eq 1
     expect(contrib[0].entity.contact[0]).to be_a RelatonBib::Contact
-    expect(contrib[0].entity.contact[0].type).to eq "email"
-    expect(contrib[0].entity.contact[0].value).to eq "andrew_banks@uk.ibm.com"
-    expect(contrib[0].entity.affiliation).to be_a Array
-    expect(contrib[0].entity.affiliation.size).to eq 1
-    expect(contrib[0].entity.affiliation[0]).to be_a RelatonBib::Affiliation
-    expect(contrib[1].entity.name.forename[0].content).to eq "Ed"
-    expect(contrib[1].entity.name.surname.content).to eq "Briggs"
-    expect(contrib[2].entity.name.forename[0].content).to eq "Ken"
-    expect(contrib[2].entity.name.surname.content).to eq "Borgendale"
-    expect(contrib[3].entity.name.forename[0].content).to eq "Rahul"
-    expect(contrib[3].entity.name.surname.content).to eq "Gupta"
+    expect(contrib[0].entity.contact[0].type).to eq "uri"
+    expect(contrib[0].entity.contact[0].value).to eq "https://www.oasis-open.org/committees/mqtt/"
+    expect(contrib[1]).to be_a RelatonBib::ContributionInfo
+    expect(contrib[1].role).to be_a Array
+    expect(contrib[1].role.size).to eq 1
+    expect(contrib[1].role[0]).to be_a RelatonBib::ContributorRole
+    expect(contrib[1].role[0].type).to eq "editor"
+    expect(contrib[1].entity).to be_a RelatonBib::Person
+    expect(contrib[1].entity.name).to be_a RelatonBib::FullName
+    expect(contrib[1].entity.name.forename).to be_a Array
+    expect(contrib[1].entity.name.forename.size).to eq 1
+    expect(contrib[1].entity.name.forename[0]).to be_a RelatonBib::Forename
+    expect(contrib[1].entity.name.forename[0].content).to eq "Andrew"
+    expect(contrib[1].entity.name.surname).to be_a RelatonBib::LocalizedString
+    expect(contrib[1].entity.name.surname.content).to eq "Banks"
+    expect(contrib[1].entity.contact).to be_a Array
+    expect(contrib[1].entity.contact.size).to eq 1
+    expect(contrib[1].entity.contact[0]).to be_a RelatonBib::Contact
+    expect(contrib[1].entity.contact[0].type).to eq "email"
+    expect(contrib[1].entity.contact[0].value).to eq "andrew_banks@uk.ibm.com"
+    expect(contrib[1].entity.affiliation).to be_a Array
+    expect(contrib[1].entity.affiliation.size).to eq 1
+    expect(contrib[1].entity.affiliation[0]).to be_a RelatonBib::Affiliation
+    expect(contrib[2].entity.name.forename[0].content).to eq "Ed"
+    expect(contrib[2].entity.name.surname.content).to eq "Briggs"
+    expect(contrib[3].entity.name.forename[0].content).to eq "Ken"
+    expect(contrib[3].entity.name.surname.content).to eq "Borgendale"
+    expect(contrib[4].entity.name.forename[0].content).to eq "Rahul"
+    expect(contrib[4].entity.name.surname.content).to eq "Gupta"
   end
 
   it "get editors from node if there is no link" do
     doc = Nokogiri::HTML File.read("spec/fixtures/ciq-v10.html", encoding: "UTF-8")
     dp = described_class.new doc.at("//details")
-    editors = dp.parse_editors
+    editors = dp.parse_contributor
     expect(editors).to be_a Array
-    expect(editors.size).to eq 1
+    expect(editors.size).to eq 2
     expect(editors[0]).to be_a RelatonBib::ContributionInfo
     expect(editors[0].role).to be_a Array
     expect(editors[0].role.size).to eq 1
     expect(editors[0].role[0]).to be_a RelatonBib::ContributorRole
-    expect(editors[0].role[0].type).to eq "editor"
-    expect(editors[0].entity).to be_a RelatonBib::Person
-    expect(editors[0].entity.name).to be_a RelatonBib::FullName
-    expect(editors[0].entity.name.forename).to be_a Array
-    expect(editors[0].entity.name.forename.size).to eq 1
-    expect(editors[0].entity.name.forename[0]).to be_a RelatonBib::Forename
-    expect(editors[0].entity.name.forename[0].content).to eq "Ram"
-    expect(editors[0].entity.name.surname).to be_a RelatonBib::LocalizedString
-    expect(editors[0].entity.name.surname.content).to eq "Kumar"
+    expect(editors[0].role[0].type).to eq "publisher"
+    expect(editors[0].entity).to be_a RelatonBib::Organization
+    expect(editors[0].entity.name).to be_a Array
+    expect(editors[0].entity.name.size).to eq 1
+    expect(editors[0].entity.name[0]).to be_a RelatonBib::LocalizedString
+    expect(editors[0].entity.name[0].content).to eq "OASIS Customer Information Quality TC"
+    expect(editors[0].entity.contact).to be_a Array
+    expect(editors[0].entity.contact.size).to eq 1
+    expect(editors[0].entity.contact[0]).to be_a RelatonBib::Contact
+    expect(editors[0].entity.contact[0].type).to eq "uri"
+    expect(editors[0].entity.contact[0].value).to eq "https://www.oasis-open.org/committees/ciq/"
+    expect(editors[1]).to be_a RelatonBib::ContributionInfo
+    expect(editors[1].role).to be_a Array
+    expect(editors[1].role.size).to eq 1
+    expect(editors[1].role[0]).to be_a RelatonBib::ContributorRole
+    expect(editors[1].role[0].type).to eq "editor"
+    expect(editors[1].entity).to be_a RelatonBib::Person
+    expect(editors[1].entity.name).to be_a RelatonBib::FullName
+    expect(editors[1].entity.name.forename).to be_a Array
+    expect(editors[1].entity.name.forename.size).to eq 1
+    expect(editors[1].entity.name.forename[0]).to be_a RelatonBib::Forename
+    expect(editors[1].entity.name.forename[0].content).to eq "Ram"
+    expect(editors[1].entity.name.surname).to be_a RelatonBib::LocalizedString
+    expect(editors[1].entity.name.surname.content).to eq "Kumar"
   end
 end

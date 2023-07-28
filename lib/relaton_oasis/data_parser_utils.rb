@@ -7,6 +7,10 @@ module RelatonOasis
     # @return [Array<RelatonBib::ContributionInfo>] contributors
     #
     def parse_contributor
+      parse_publisher + parse_chairs + parse_editors
+    end
+
+    def parse_editors_from_text
       return [] unless text
 
       text.match(/(?<=Edited\sby\s)[^.]+/).to_s.split(/,?\sand\s|,\s/).map do |c|
@@ -14,23 +18,41 @@ module RelatonOasis
       end
     end
 
-    def parse_editors
-      link = @node.at("./div/div/div[contains(@class, 'standard__grid--cite-as')]/p[strong or span/strong]/a")
-      link ||= @node.at("./a")
-      return parse_contributor unless link && link[:href].match?(/\.html$/)
+    def page
+      return @page if defined? @page
 
-      agent = Mechanize.new
-      agent.agent.allowed_error_codes = [404]
-      sleep 1 # to avoid 429 error
-      page = agent.get link[:href]
-      return parse_contributor unless page.code == "200"
-
-      page.xpath("//p[contains(@class, 'Contributor') and preceding-sibling::p[contains(., 'Editor')]]").map do |p|
-        name = p.text.match(/^[^(]+/).to_s.strip
-        email, org = p.xpath ".//a[@href]"
-        entity = create_person name, email, org
-        RelatonBib::ContributionInfo.new(role: [type: "editor"], entity: entity)
+      if link_node && link_node[:href].match?(/\.html$/)
+        agent = Mechanize.new
+        agent.agent.allowed_error_codes = [404]
+        sleep 1 # to avoid 429 error
+        resp = agent.get link_node[:href]
+        @page = resp if resp.code == "200"
       end
+    end
+
+    def parse_chairs
+      return [] unless page
+
+      page.xpath(
+        "//p[contains(@class, 'Contributor')][preceding-sibling::p[starts-with(., 'Chair')]]" \
+        "[following-sibling::p[starts-with(., 'Editor')]]",
+      ).map { |p| create_contribution_info(p, "authorizer") }
+    end
+
+    def parse_editors
+      return parse_editors_from_text unless page
+
+      page.xpath(
+        "//p[contains(@class, 'Contributor')][preceding-sibling::p[starts-with(., 'Editor')]]" \
+        "[following-sibling::p[contains(@class, 'Title')]]",
+      ).map { |p| create_contribution_info(p, "editor") }
+    end
+
+    def create_contribution_info(person, type)
+      name = person.text.match(/^[^(]+/).to_s.strip
+      email, org = person.xpath ".//a[@href]"
+      entity = create_person name, email, org
+      RelatonBib::ContributionInfo.new(role: [type: type], entity: entity)
     end
 
     def create_person(name, email = nil, org = nil)
@@ -50,7 +72,7 @@ module RelatonOasis
     def affiliation(org)
       return [] unless org
 
-      cnt = RelatonBib::Contact.new(type: "url", value: org[:href])
+      cnt = RelatonBib::Contact.new(type: "uri", value: org[:href])
       org_name = org.text.gsub(/[\r\n]+/, " ")
       organization = RelatonBib::Organization.new name: org_name, contact: [cnt]
       [RelatonBib::Affiliation.new(organization: organization)]
