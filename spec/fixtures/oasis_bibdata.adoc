@@ -23,13 +23,15 @@ contributor::
 contributor.organization.name:: OASIS
 contributor.organization.contact.uri:: https://www.oasis-open.org/
 contributor.role::
+contributor.role.description:: Standards Development Organization
 contributor.role.type:: authorizer
 contributor.role::
 contributor.role.type:: publisher
 contributor::
 contributor.organization.name:: OASIS Advanced Message Queuing Protocol (AMQP) TC
 contributor.organization.contact.uri:: http://www.oasis-open.org/committees/amqp/
-contributor.role.type:: publisher
+contributor.role.description:: Committee
+contributor.role.type:: authorizer
 contributor::
 contributor.person.given.forename.content:: Ram
 contributor.person.given.forename.language:: en
@@ -40,7 +42,8 @@ contributor.person.name.surname.script:: Latn
 contributor.person.affiliation.organization.name:: Microsoft
 contributor.person.affiliation.organization.contact.uri:: http://www.microsoft.com
 contributor.person.contact.email:: Ram.Jeyaraman@microsoft.com
-contributor.role.type:: authorizer
+contributor.role.description:: Chair
+contributor.role.type:: editor
 contributor::
 contributor.person.given.forename.content:: Angus
 contributor.person.given.forename.language:: en
@@ -51,7 +54,8 @@ contributor.person.name.surname.script:: Latn
 contributor.person.affiliation.organization.name:: INETCO Systems
 contributor.person.affiliation.organization.contact.uri:: http://www.inetco.com
 contributor.person.contact.email:: angus.telfer@inetco.com
-contributor.role.type:: authorizer
+contributor.role.description:: Chair
+contributor.role.type:: editor
 contributor::
 contributor.person.given.forename.content:: Robert
 contributor.person.given.forename.language:: en

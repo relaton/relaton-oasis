@@ -6,7 +6,9 @@
     <on>2012-10-30</on>
   </date>
   <contributor>
-    <role type="authorizer"/>
+    <role type="authorizer">
+      <description>Standards Development Organization</description>
+    </role>
     <role type="publisher"/>
     <organization>
       <name>OASIS</name>
@@ -14,14 +16,18 @@
     </organization>
   </contributor>
   <contributor>
-    <role type="publisher"/>
+    <role type="authorizer">
+      <description>Committee</description>
+    </role>
     <organization>
       <name>OASIS Advanced Message Queuing Protocol (AMQP) TC</name>
       <uri>http://www.oasis-open.org/committees/amqp/</uri>
     </organization>
   </contributor>
   <contributor>
-    <role type="authorizer"/>
+    <role type="editor">
+      <description>Chair</description>
+    </role>
     <person>
       <name>
         <forename language="en" script="Latn">Ram</forename>
@@ -37,7 +43,9 @@
     </person>
   </contributor>
   <contributor>
-    <role type="authorizer"/>
+    <role type="editor">
+      <description>Chair</description>
+    </role>
     <person>
       <name>
         <forename language="en" script="Latn">Angus</forename>

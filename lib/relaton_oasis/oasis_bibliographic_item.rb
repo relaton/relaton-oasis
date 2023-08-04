@@ -3,7 +3,7 @@ module RelatonOasis
     AREAS = %w[Cloud Content-Technologies Cybersecurity e-Business eGov/Legal
                Emergency-Management Energy Information-Modeling IoT
                Lifecycle-Integration Localization Messaging Privacy/Identity
-               Security SOA Web-Services].freeze
+               Security SOA Web-Services Software-Development Virtualization].freeze
 
     attr_reader :technology_area
 

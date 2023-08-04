@@ -148,6 +148,9 @@ describe RelatonOasis::DataPartParser do
     expect(contrib[0].role).to be_instance_of Array
     expect(contrib[0].role.size).to eq 1
     expect(contrib[0].role[0].type).to eq "authorizer"
+    expect(contrib[0].role[0].description).to be_instance_of Array
+    expect(contrib[0].role[0].description.size).to eq 1
+    expect(contrib[0].role[0].description[0].content).to eq "Committee"
     expect(contrib[0].entity).to be_instance_of RelatonBib::Organization
     expect(contrib[0].entity.name).to be_instance_of Array
     expect(contrib[0].entity.name.size).to eq 1

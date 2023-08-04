@@ -13,7 +13,10 @@ module RelatonOasis
     def publisher_oasis
       cnt = RelatonBib::Contact.new type: "uri", value: "https://www.oasis-open.org/"
       entity = RelatonBib::Organization.new name: "OASIS", contact: [cnt]
-      role = [{ type: "authorizer" }, { type: "publisher" }]
+      role = [
+        { type: "authorizer", description: ["Standards Development Organization"] },
+        { type: "publisher" },
+      ]
       [RelatonBib::ContributionInfo.new(entity: entity, role: role)]
     end
 
@@ -42,7 +45,7 @@ module RelatonOasis
 
       page.xpath(
         "//p[preceding-sibling::p[starts-with(., 'Chair')]][following-sibling::p[starts-with(., 'Editor')]]",
-      ).map { |p| create_contribution_info(p, "authorizer") }
+      ).map { |p| create_contribution_info(p, "editor", ["Chair"]) }
     end
 
     def parse_editors
@@ -54,11 +57,12 @@ module RelatonOasis
       ).map { |p| create_contribution_info(p, "editor") }
     end
 
-    def create_contribution_info(person, type)
+    def create_contribution_info(person, type, description = [])
       name = person.text.match(/^[^(]+/).to_s.strip
       email, org = person.xpath ".//a[@href]"
       entity = create_person name, email, org
-      RelatonBib::ContributionInfo.new(role: [type: type], entity: entity)
+      role = { type: type, description: description }
+      RelatonBib::ContributionInfo.new(role: [role], entity: entity)
     end
 
     def create_person(name, email = nil, org = nil)

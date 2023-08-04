@@ -241,6 +241,30 @@ describe RelatonOasis::DataParser do
     expect(dp.parse_contributor).to eq %i[oasis publisher chairs editors]
   end
 
+  it "#publisher_oasis" do
+    dp = described_class.new mqtt_v50
+    contrib = dp.publisher_oasis
+    expect(contrib).to be_a Array
+    expect(contrib.size).to eq 1
+    expect(contrib[0]).to be_a RelatonBib::ContributionInfo
+    expect(contrib[0].role).to be_a Array
+    expect(contrib[0].role.size).to eq 2
+    expect(contrib[0].role[0].type).to eq "authorizer"
+    expect(contrib[0].role[0].description).to be_instance_of Array
+    expect(contrib[0].role[0].description.size).to eq 1
+    expect(contrib[0].role[0].description[0].content).to eq "Standards Development Organization"
+    expect(contrib[0].role[1].type).to eq "publisher"
+    expect(contrib[0].entity).to be_a RelatonBib::Organization
+    expect(contrib[0].entity.name).to be_a Array
+    expect(contrib[0].entity.name.size).to eq 1
+    expect(contrib[0].entity.name[0].content).to eq "OASIS"
+    expect(contrib[0].entity.contact).to be_a Array
+    expect(contrib[0].entity.contact.size).to eq 1
+    expect(contrib[0].entity.contact[0]).to be_a RelatonBib::Contact
+    expect(contrib[0].entity.contact[0].type).to eq "uri"
+    expect(contrib[0].entity.contact[0].value).to eq "https://www.oasis-open.org/"
+  end
+
   it "#parse_authorizer", vcr: "mqtt-v50" do
     dp = described_class.new mqtt_v50
     contrib = dp.parse_authorizer
@@ -249,7 +273,10 @@ describe RelatonOasis::DataParser do
     expect(contrib[0]).to be_a RelatonBib::ContributionInfo
     expect(contrib[0].role).to be_a Array
     expect(contrib[0].role.size).to eq 1
-    expect(contrib[0].role[0].type).to eq "publisher"
+    expect(contrib[0].role[0].type).to eq "authorizer"
+    expect(contrib[0].role[0].description).to be_instance_of Array
+    expect(contrib[0].role[0].description.size).to eq 1
+    expect(contrib[0].role[0].description[0].content).to eq "Committee"
     expect(contrib[0].entity).to be_a RelatonBib::Organization
     expect(contrib[0].entity.name).to be_a Array
     expect(contrib[0].entity.name.size).to eq 1
@@ -269,7 +296,10 @@ describe RelatonOasis::DataParser do
     expect(contrib[0]).to be_a RelatonBib::ContributionInfo
     expect(contrib[0].role).to be_a Array
     expect(contrib[0].role.size).to eq 1
-    expect(contrib[0].role[0].type).to eq "authorizer"
+    expect(contrib[0].role[0].type).to eq "editor"
+    expect(contrib[0].role[0].description).to be_instance_of Array
+    expect(contrib[0].role[0].description.size).to eq 1
+    expect(contrib[0].role[0].description[0].content).to eq "Chair"
     expect(contrib[0].entity).to be_a RelatonBib::Person
     expect(contrib[0].entity.name).to be_a RelatonBib::FullName
     expect(contrib[0].entity.name.forename).to be_a Array

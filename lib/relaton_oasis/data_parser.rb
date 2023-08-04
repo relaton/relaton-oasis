@@ -99,7 +99,8 @@ module RelatonOasis
       @node.xpath("./div[@class='standard__details']/a").map do |a|
         cnt = RelatonBib::Contact.new(type: "uri", value: a[:href])
         org = RelatonBib::Organization.new name: a.text.strip, contact: [cnt]
-        RelatonBib::ContributionInfo.new entity: org, role: [{ type: "publisher" }]
+        role = { type: "authorizer", description: ["Committee"] }
+        RelatonBib::ContributionInfo.new entity: org, role: [role]
       end
     end
 

@@ -133,7 +133,8 @@ module RelatonOasis
       page.xpath("//p[preceding-sibling::p[starts-with(., 'Technical')]][1]//a").map do |a|
         cnt = RelatonBib::Contact.new(type: "uri", value: a[:href])
         org = RelatonBib::Organization.new name: a.text.gsub(/[\r\n]+/, " ").strip, contact: [cnt]
-        RelatonBib::ContributionInfo.new entity: org, role: [{ type: "authorizer" }]
+        role = { type: "authorizer", description: ["Committee"] }
+        RelatonBib::ContributionInfo.new entity: org, role: [role]
       end
     end
 
