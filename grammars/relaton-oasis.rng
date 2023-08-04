@@ -54,6 +54,8 @@
       <value>Security</value>
       <value>SOA</value>
       <value>Web-Services</value>
+      <value>Software-Development</value>
+      <value>Virtualization</value>
     </choice>
   </define>
 </grammar>

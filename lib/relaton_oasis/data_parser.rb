@@ -95,7 +95,7 @@ module RelatonOasis
       RelatonBib::EditorialGroup.new tc
     end
 
-    def parse_publisher
+    def parse_authorizer
       @node.xpath("./div[@class='standard__details']/a").map do |a|
         cnt = RelatonBib::Contact.new(type: "uri", value: a[:href])
         org = RelatonBib::Organization.new name: a.text.strip, contact: [cnt]

@@ -127,13 +127,13 @@ module RelatonOasis
       [RelatonBib::DocumentRelation.new(type: "partOf", bibitem: bib)]
     end
 
-    def parse_publisher
+    def parse_authorizer
       return [] unless page
 
       page.xpath("//p[preceding-sibling::p[starts-with(., 'Technical')]][1]//a").map do |a|
         cnt = RelatonBib::Contact.new(type: "uri", value: a[:href])
         org = RelatonBib::Organization.new name: a.text.gsub(/[\r\n]+/, " ").strip, contact: [cnt]
-        RelatonBib::ContributionInfo.new entity: org, role: [{ type: "publisher" }]
+        RelatonBib::ContributionInfo.new entity: org, role: [{ type: "authorizer" }]
       end
     end
 

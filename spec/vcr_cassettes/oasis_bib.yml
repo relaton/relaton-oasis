@@ -29,7 +29,7 @@ http_interactions:
       Content-Type:
       - application/zip
       Etag:
-      - W/"ed4e5cc540460d5d2b784c240722e8c25292f9d325da01be376ce79ea1951f93"
+      - W/"5c66ec979a3ad6b7a7e9e803569d006ebcc73bf8ae619d3ac08bd25f8055570f"
       Strict-Transport-Security:
       - max-age=31536000
       X-Content-Type-Options:
@@ -39,21 +39,21 @@ http_interactions:
       X-Xss-Protection:
       - 1; mode=block
       X-Github-Request-Id:
-      - 4D34:9E37:6BE8:7E9A:64C03159
+      - 1CE8:2462:980EF:ACF30:64CBF38E
       Accept-Ranges:
       - bytes
       Date:
-      - Tue, 25 Jul 2023 20:32:25 GMT
+      - Thu, 03 Aug 2023 18:35:58 GMT
       Via:
       - 1.1 varnish
       X-Served-By:
-      - cache-atl18480-ATL
+      - cache-iad-kcgs7200083-IAD
       X-Cache:
       - MISS
       X-Cache-Hits:
       - '0'
       X-Timer:
-      - S1690317146.575191,VS0,VE111
+      - S1691087759.898709,VS0,VE72
       Vary:
       - Authorization,Accept-Encoding,Origin
       Access-Control-Allow-Origin:
@@ -61,16 +61,16 @@ http_interactions:
       Cross-Origin-Resource-Policy:
       - cross-origin
       X-Fastly-Request-Id:
-      - 6d1d923f5eb5106da2a0923a4f01e3f8767ab421
+      - cb48d0862e9091be4e4a3cfc546a215fe2da955c
       Expires:
-      - Tue, 25 Jul 2023 20:37:25 GMT
+      - Thu, 03 Aug 2023 18:40:58 GMT
       Source-Age:
       - '0'
     body:
       encoding: UTF-8
       base64_string: |
-        UEsDBBQAAAAIAPOg+VaX0OE0JRoAAEyQAAANABwAaW5kZXgtdjEueWFtbFVU
-        CQADiivAZIorwGR1eAsAAQTpAwAABHsAAACUXety27iS/n+eIi+ArC0pM2fm
+        UEsDBBQAAAAIAOByA1eX0OE0JRoAAEyQAAANABwAaW5kZXgtdjEueWFtbFVU
+        CQADRLjLZES4y2R1eAsAAQTpAwAABHsAAACUXety27iS/n+eIi+ArC0pM2fm
         H0VSMseiSBOUL1u1dYqWGEcnkqiQVCY+T7PPsk+2AHgRLt0gXRXnh9Dfh0aj
         0WiAIEgI+Qf59Od+9+en7PjjTLZFmf/j06c/v+4P+Z+fdlmd/ZcTPsTEjRL/
         83t2PBjSpPiZlz/3+d/k5+3nGxLXNxieRI9+8hj4T+RRSKY3CGP9fs6rju4W
@@ -219,10 +219,10 @@ http_interactions:
         4JRS1Xnshrk0vD2OJ6luj2k6TK3hhXE8VpWan4Rfmizwi/je6/ayKSy3HnMh
         4w3VtON43spw7NhFdJ7jMhG7HcxgZwx+BjtT7C/gpvIlWn/khTe6Mfj3OA93
         EK7LPbRORnH5OV0/mdn2A5qIS75/YWanz6pm3cDPCqUcNxihq+Q/rR9Xaf20
-        LnXyBVJLXOqcC+ux/QNQSwECHgMUAAAACADzoPlWl9DhNCUaAABMkAAADQAY
-        AAAAAAABAAAApIEAAAAAaW5kZXgtdjEueWFtbFVUBQADiivAZHV4CwABBOkD
+        LnXyBVJLXOqcC+ux/QNQSwECHgMUAAAACADgcgNXl9DhNCUaAABMkAAADQAY
+        AAAAAAABAAAApIEAAAAAaW5kZXgtdjEueWFtbFVUBQADRLjLZHV4CwABBOkD
         AAAEewAAAFBLBQYAAAAAAQABAFMAAABsGgAAAAA=
-  recorded_at: Tue, 25 Jul 2023 20:32:25 GMT
+  recorded_at: Thu, 03 Aug 2023 18:35:58 GMT
 - request:
     method: get
     uri: https://raw.githubusercontent.com/relaton/relaton-data-oasis/main/data/AKOMANTOSOCORE-V1.0-PT1-VOCABULARY.yaml
@@ -235,13 +235,11 @@ http_interactions:
       Accept:
       - "*/*"
       User-Agent:
-      - Mechanize/2.8.5 Ruby/3.2.0p0 (http://github.com/sparklemotion/mechanize/)
+      - Mechanize/2.9.1 Ruby/3.2.0p0 (http://github.com/sparklemotion/mechanize/)
       Accept-Charset:
       - ISO-8859-1,utf-8;q=0.7,*;q=0.7
       Accept-Language:
       - en-us,en;q=0.5
-      Host:
-      - raw.githubusercontent.com
       Connection:
       - keep-alive
       Keep-Alive:
@@ -254,7 +252,7 @@ http_interactions:
       Connection:
       - keep-alive
       Content-Length:
-      - '1323'
+      - '1013'
       Cache-Control:
       - max-age=300
       Content-Security-Policy:
@@ -262,7 +260,7 @@ http_interactions:
       Content-Type:
       - text/plain; charset=utf-8
       Etag:
-      - W/"83581f887045d82f904b9e96e9b6f9bc5ee88863f5b9a872cdf2e057bd8dcd1b"
+      - W/"4c1ec491b4dc57296ba19e4e5c24b11b3cf2032553c7b99a29937638da7a86fa"
       Strict-Transport-Security:
       - max-age=31536000
       X-Content-Type-Options:
@@ -272,23 +270,23 @@ http_interactions:
       X-Xss-Protection:
       - 1; mode=block
       X-Github-Request-Id:
-      - 1352:67F9:A160:B4AB:64C03158
+      - 2A90:5C75:95015:A1C11:64CBF38E
       Content-Encoding:
       - gzip
       Accept-Ranges:
       - bytes
       Date:
-      - Tue, 25 Jul 2023 20:32:26 GMT
+      - Thu, 03 Aug 2023 18:35:59 GMT
       Via:
       - 1.1 varnish
       X-Served-By:
-      - cache-atl18483-ATL
+      - cache-iad-kcgs7200083-IAD
       X-Cache:
       - MISS
       X-Cache-Hits:
       - '0'
       X-Timer:
-      - S1690317146.915845,VS0,VE100
+      - S1691087759.326647,VS0,VE130
       Vary:
       - Authorization,Accept-Encoding,Origin
       Access-Control-Allow-Origin:
@@ -296,43 +294,36 @@ http_interactions:
       Cross-Origin-Resource-Policy:
       - cross-origin
       X-Fastly-Request-Id:
-      - 4515772a86b6782e2a0155636ac88fe7d7d08b5b
+      - 520aa56d2f13fad284fc4be9a16c033e75bfa917
       Expires:
-      - Tue, 25 Jul 2023 20:37:26 GMT
+      - Thu, 03 Aug 2023 18:40:59 GMT
       Source-Age:
       - '0'
     body:
       encoding: UTF-8
       base64_string: |
-        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
-        xwvddAd+k2jndwWv4popOwAA
-  recorded_at: Tue, 25 Jul 2023 20:32:25 GMT
-recorded_with: VCR 6.1.0
+        H4sIAAAAAAAAA+1YS0/cSBC++1eUcmFXim2GvWR9IjtsIqQhQcCyOUSK2nbb
+        U6LdbfXDQH59qtuP8QyjDVIShLTMwXY/6vV91Y+aOI4jU6x5w+KOa4NKZtAt
+        kqPkjwjLDD6+vTy9fHujGvbBKqOWSvOYhg/jc7uIr1XBcieYvo8sWsGzKIZC
+        SculzeAgSEEQg+teNZAknDNtYZHBp7MVbDQcRACCydqxmvQAxMAlvUyhsbV9
+        x4pZ31Up3TAyYPmdTVvB0Hfa+5Zn0PiGQHmz5cna2jZL01IVJlHMoIlVy2Wi
+        dJ0KXjNBA41I2Y2MCwov9eGlyqQt+bmIu8nDaUYPgDLx7oxkbRsxOWN0EQ1f
+        lsmS6TIiSwQq+TZBC4/AdlQYBKjVamyonxDQjnud0jU519ljdJXMBpp6jWiM
+        4yWp7Jhw1D44Oly8iQ/fxEd/HkQeP425s0p7CYKLSfzKrE8REgGQrOH91wzs
+        PqqVx/VEFa6hTuL5t7HjbPU7XC2DkBdhhR01OI09VYa4ur293aWqUE2D1nJu
+        5qyRsFZiyJg+qNblAs2aa3K6pbx76C5AjR2XYyOkFJ8Pb0X0juWopoHtLN1M
+        D9k6/jZZu5kwZG8Ydnrb2mTrGi0TOPU/NLVlaNfMzAirKhQ4I2sfgbuobIX9
+        j8SwIdh7UBX8pYSqJYuXpxeX705PtjyfSNwhcuCxQG0qLBMnMVcJ2nQf+7T/
+        oMig8lgf0zodJ+/hlzm7Vhq//jSCz5TEgj0Rw+dMNKiJiP8vyU3AO2lHJI5f
+        yH4h25PNS6TD5icRfaFqSpqn4fmSHKYTuH4WNK/4HZoP/vEaGJxgh+HqRZRf
+        cF7C38LwDmfQPIJw4bVJ/0joGP4vurVHPTEDHsfbgr+a8veUYPapTmoKT1mL
+        z2RtfyrohUwQBsq1r2G1Wj6W4LtB9HvU1h7dpJviPp4L/mpqXy5hz+sSNpC7
+        wSZgMmIxYMByY3XQPwvpao0GyqE0oFpGdVhyA3bN6ayw2AVoaOvyHaag6z/t
+        YrIMTZqHtfT1jyywFdwEvwkYPzgvN31pORZdCfzLgQSEKzkwQaOM8Naa7HQc
+        fAnnfSu4lihrryko9ZUkVE4W3hvKBovkI1n6jhUKseyNWDXGBv1to0RTOKKS
+        jKIQziNjh33Zu59zySu0FHjFmXWazPmwDa0xplEZcMb7N7MftG75EP1ACa25
+        GJJyqqMImo8Vzc4xR8ubPkt6UctLzasx4XaKvz1laDQt8V27lAk7RXKfWrSv
+        1H4r8/6E5QGv9paWn/VnuVNdvopIfRYif/C/xiH5Ynmxln4p3X9hmjNvYdlH
+        EF+NQ0S3T+n3qkuD8ugbkqTlZygRAAA=
+  recorded_at: Thu, 03 Aug 2023 18:35:59 GMT
+recorded_with: VCR 6.2.0

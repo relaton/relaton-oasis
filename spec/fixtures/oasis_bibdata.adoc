@@ -20,6 +20,13 @@ abstract.language:: en
 abstract.script:: Latn
 abstract.format:: text/plain
 contributor::
+contributor.organization.name:: OASIS
+contributor.organization.contact.uri:: https://www.oasis-open.org/
+contributor.role::
+contributor.role.type:: authorizer
+contributor.role::
+contributor.role.type:: publisher
+contributor::
 contributor.organization.name:: OASIS Advanced Message Queuing Protocol (AMQP) TC
 contributor.organization.contact.uri:: http://www.oasis-open.org/committees/amqp/
 contributor.role.type:: publisher

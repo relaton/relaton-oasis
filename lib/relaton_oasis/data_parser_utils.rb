@@ -7,7 +7,14 @@ module RelatonOasis
     # @return [Array<RelatonBib::ContributionInfo>] contributors
     #
     def parse_contributor
-      parse_publisher + parse_chairs + parse_editors
+      publisher_oasis + parse_authorizer + parse_chairs + parse_editors
+    end
+
+    def publisher_oasis
+      cnt = RelatonBib::Contact.new type: "uri", value: "https://www.oasis-open.org/"
+      entity = RelatonBib::Organization.new name: "OASIS", contact: [cnt]
+      role = [{ type: "authorizer" }, { type: "publisher" }]
+      [RelatonBib::ContributionInfo.new(entity: entity, role: role)]
     end
 
     def parse_editors_from_text
@@ -34,8 +41,7 @@ module RelatonOasis
       return [] unless page
 
       page.xpath(
-        "//p[contains(@class, 'Contributor')][preceding-sibling::p[starts-with(., 'Chair')]]" \
-        "[following-sibling::p[starts-with(., 'Editor')]]",
+        "//p[preceding-sibling::p[starts-with(., 'Chair')]][following-sibling::p[starts-with(., 'Editor')]]",
       ).map { |p| create_contribution_info(p, "authorizer") }
     end
 

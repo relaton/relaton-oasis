@@ -6,6 +6,14 @@
     <on>2012-10-30</on>
   </date>
   <contributor>
+    <role type="authorizer"/>
+    <role type="publisher"/>
+    <organization>
+      <name>OASIS</name>
+      <uri>https://www.oasis-open.org/</uri>
+    </organization>
+  </contributor>
+  <contributor>
     <role type="publisher"/>
     <organization>
       <name>OASIS Advanced Message Queuing Protocol (AMQP) TC</name>

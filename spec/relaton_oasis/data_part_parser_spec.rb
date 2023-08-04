@@ -140,45 +140,23 @@ describe RelatonOasis::DataPartParser do
     expect(date[0].on).to eq "2012-10-29"
   end
 
-  it "parse contributor", vcr: "part_editors" do
-    contrib = subject.parse_contributor
+  it "#parse_authorizer", vcr: "part_editors" do
+    contrib = subject.parse_authorizer
     expect(contrib).to be_instance_of Array
-    expect(contrib.size).to eq 6
+    expect(contrib.size).to eq 1
     expect(contrib[0]).to be_instance_of RelatonBib::ContributionInfo
     expect(contrib[0].role).to be_instance_of Array
-    expect(contrib[1].role.size).to eq 1
-    expect(contrib[1].role[0]).to be_instance_of RelatonBib::ContributorRole
-    expect(contrib[1].role[0].type).to eq "authorizer"
-    expect(contrib[1].entity).to be_instance_of RelatonBib::Person
-    expect(contrib[1].entity.name.forename).to be_instance_of Array
-    expect(contrib[1].entity.name.forename.size).to eq 1
-    expect(contrib[1].entity.name.forename[0]).to be_instance_of RelatonBib::Forename
-    expect(contrib[1].entity.name.forename[0].content).to eq "Ram"
-    expect(contrib[1].entity.name.surname).to be_instance_of RelatonBib::LocalizedString
-    expect(contrib[1].entity.name.surname.content).to eq "Jeyaraman"
-    expect(contrib[1].entity.contact).to be_instance_of Array
-    expect(contrib[1].entity.contact.size).to eq 1
-    expect(contrib[1].entity.contact[0]).to be_instance_of RelatonBib::Contact
-    expect(contrib[1].entity.contact[0].type).to eq "email"
-    expect(contrib[1].entity.contact[0].value).to eq "Ram.Jeyaraman@microsoft.com"
-    expect(contrib[1].entity.affiliation).to be_instance_of Array
-    expect(contrib[1].entity.affiliation.size).to eq 1
-    expect(contrib[1].entity.affiliation[0]).to be_instance_of RelatonBib::Affiliation
-    expect(contrib[1].entity.affiliation[0].organization).to be_instance_of RelatonBib::Organization
-    expect(contrib[1].entity.affiliation[0].organization.name).to be_instance_of Array
-    expect(contrib[1].entity.affiliation[0].organization.name.size).to eq 1
-    expect(contrib[1].entity.affiliation[0].organization.name[0]).to be_instance_of RelatonBib::LocalizedString
-    expect(contrib[1].entity.affiliation[0].organization.name[0].content).to eq "Microsoft"
-    expect(contrib[2].entity.name.forename[0].content).to eq "Angus"
-    expect(contrib[2].entity.name.surname.content).to eq "Telfer"
-    expect(contrib[3].entity.name.forename[0].content).to eq "Robert"
-    expect(contrib[3].entity.name.surname.content).to eq "Godfrey"
-    expect(contrib[3].role[0].type).to eq "editor"
-    expect(contrib[3].entity.contact[0].value).to eq "robert.godfrey@jpmorgan.com"
-    expect(contrib[4].entity.name.forename[0].content).to eq "David"
-    expect(contrib[4].entity.name.surname.content).to eq "Ingham"
-    expect(contrib[5].entity.name.forename[0].content).to eq "Rafael"
-    expect(contrib[5].entity.name.surname.content).to eq "Schloming"
+    expect(contrib[0].role.size).to eq 1
+    expect(contrib[0].role[0].type).to eq "authorizer"
+    expect(contrib[0].entity).to be_instance_of RelatonBib::Organization
+    expect(contrib[0].entity.name).to be_instance_of Array
+    expect(contrib[0].entity.name.size).to eq 1
+    expect(contrib[0].entity.name[0].content).to eq "OASIS Advanced Message Queuing Protocol (AMQP) TC"
+    expect(contrib[0].entity.contact).to be_instance_of Array
+    expect(contrib[0].entity.contact.size).to eq 1
+    expect(contrib[0].entity.contact[0]).to be_instance_of RelatonBib::Contact
+    expect(contrib[0].entity.contact[0].type).to eq "uri"
+    expect(contrib[0].entity.contact[0].value).to eq "http://www.oasis-open.org/committees/amqp/"
   end
 
   it "parse relation" do
