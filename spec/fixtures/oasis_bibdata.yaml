@@ -1,5 +1,5 @@
 ---
-schema-version: v1.2.3
+schema-version: v1.2.4
 id: OASISamqp-core
 title:
 - content: Advanced Message Queueing Protocol (AMQP) v1.0
@@ -231,6 +231,6 @@ doctype: standard
 editorialgroup:
 - name: OASIS Advanced Message Queuing Protocol (AMQP) TC
 ext:
-  schema-version: v1.0.0
+  schema-version: v1.0.1
 technology_area:
 - Messaging

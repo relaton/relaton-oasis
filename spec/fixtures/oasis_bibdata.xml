@@ -1,4 +1,4 @@
-<bibdata type="standard" schema-version="v1.2.3">
+<bibdata type="standard" schema-version="v1.2.4">
   <title type="main" format="text/plain" language="en" script="Latn">Advanced Message Queueing Protocol (AMQP) v1.0</title>
   <docidentifier type="OASIS" primary="true">OASIS amqp-core</docidentifier>
   <docnumber>amqp-core</docnumber>
@@ -141,7 +141,7 @@
       <formattedref format="text/plain">OASIS amqp-core-security-v1.0-Pt5</formattedref>
     </bibitem>
   </relation>
-  <ext schema-version="v1.0.0">
+  <ext schema-version="v1.0.1">
     <doctype>standard</doctype>
     <editorialgroup>
       <technical-committee>OASIS Advanced Message Queuing Protocol (AMQP) TC</technical-committee>
