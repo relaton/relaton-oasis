@@ -7,7 +7,7 @@ describe RelatonOasis::OasisBibliographicItem do
   it "warns when technology area is invalid" do
     expect do
       RelatonOasis::OasisBibliographicItem.new(technology_area: ["invalid"])
-    end.to output(/Unknown technology area: invalid/).to_stderr
+    end.to output(/Unknown technology area: `invalid`/).to_stderr
   end
 
   it "render hash" do

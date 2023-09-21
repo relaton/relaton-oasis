@@ -34,15 +34,15 @@ module RelatonOasis
       #   reference is required
       # @return [RelatonOasis::OasisBibliographicItem, nil]
       def get(code, year = nil, _opts = {}) # rubocop:disable Metrics/CyclomaticComplexity,Metrics/MethodLength,Metrics/PerceivedComplexity
-        warn "[relaton-oasis] (#{code}) fetching..."
+        Util.warn "(#{code}) fetching..."
         bibitem = search code, year
         if bibitem
           docid = bibitem.docidentifier.detect(&:primary).id
-          warn "[relaton-oasis] (#{code}) found #{docid}"
-          bibitem
+          Util.warn "(#{code}) found `#{docid}`"
         else
-          warn "[relaton-oasis] (#{code}) not found"
+          Util.warn "(#{code}) not found"
         end
+        bibitem
       end
     end
   end

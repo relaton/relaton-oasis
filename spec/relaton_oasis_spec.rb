@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 RSpec.describe RelatonOasis do
+  before { RelatonOasis.instance_variable_set :@configuration, nil }
+
   it "has a version number" do
     expect(RelatonOasis::VERSION).not_to be nil
   end
