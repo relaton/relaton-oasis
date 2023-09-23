@@ -30,18 +30,29 @@ Or install it yourself as:
 
 == Usage
 
-=== Get standard using reference.
+=== Configuration
 
-All the OASIS documents are parsed from https://www.oasis-open.org/standards/ and stored in a GitHub repository https://github.com/relaton/relaton-data-oasis. You can find all possible references on the index page https://relaton.github.io/relaton-data-oasis/.
+Configuration is optional. The available option is `logger` which is a `Logger` instance. By default, the logger is `Logger.new($stderr)` with `Logger::WARN` level. To change the logger level, use `RelatonOasis.configure` block.
 
 [source,ruby]
 ----
 require 'relaton_oasis'
 => true
 
+RelatonOasis.configure do |config|
+  config.logger.level = Logger::DEBUG
+end
+----
+
+=== Get standard using reference.
+
+All the OASIS documents are parsed from https://www.oasis-open.org/standards/ and stored in a GitHub repository https://github.com/relaton/relaton-data-oasis. You can find all possible references on the index page https://relaton.github.io/relaton-data-oasis/.
+
+[source,ruby]
+----
 item = RelatonOasis::OasisBibliography.get "OASIS amqp-core"
-[relaton-oasis] (OASIS amqp-core fetching...
-[relaton-oasis] (OASIS amqp-core) found OASIS amqp-core
+[relaton-oasis] (OASIS) amqp-core fetching...
+[relaton-oasis] (OASIS amqp-core) found `OASIS amqp-core`
 => #<RelatonOasis::OasisBibliographicItem:0x00007fceea1aecb0
 ...
 ----
@@ -86,8 +97,8 @@ Some OASIS documents have `src` type link.
 [source,ruby]
 ----
 item = RelatonOasis::OasisBibliography.get "OASIS amqp-core-types-v1.0-Pt1"
-[relaton-oasis] (OASIS amqp-core-types-v1.0-Pt1 fetching...
-[relaton-oasis] (OASIS amqp-core-types-v1.0-Pt1) found OASIS amqp-core-types-v1.0-Pt1
+[relaton-oasis] (OASIS amqp-core-types-v1.0-Pt1) fetching...
+[relaton-oasis] (OASIS amqp-core-types-v1.0-Pt1) found `OASIS amqp-core-types-v1.0-Pt1`
 => #<RelatonOasis::OasisBibliographicItem:0x00007fceda0c5e08
 ...
 
