@@ -69,7 +69,12 @@ module RelatonOasis
     # Read from file or create empty index.
     #
     def read
-      @index = File.exist?(@file) ? YAML.load_file(@file, symbolize_names: true) : []
+      @index = if File.exist?(@file)
+                 YAML.load_file(@file,
+                                symbolize_names: true)
+               else
+                 []
+               end
     end
   end
 end

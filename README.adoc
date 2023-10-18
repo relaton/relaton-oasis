@@ -51,8 +51,8 @@ All the OASIS documents are parsed from https://www.oasis-open.org/standards/ an
 [source,ruby]
 ----
 item = RelatonOasis::OasisBibliography.get "OASIS amqp-core"
-[relaton-oasis] (OASIS) amqp-core fetching...
-[relaton-oasis] (OASIS amqp-core) found `OASIS amqp-core`
+[relaton-oasis] (OASIS) amqp-core Fetching from Relaton repository ...
+[relaton-oasis] (OASIS amqp-core) Found: `OASIS amqp-core`
 => #<RelatonOasis::OasisBibliographicItem:0x00007fceea1aecb0
 ...
 ----
@@ -97,8 +97,8 @@ Some OASIS documents have `src` type link.
 [source,ruby]
 ----
 item = RelatonOasis::OasisBibliography.get "OASIS amqp-core-types-v1.0-Pt1"
-[relaton-oasis] (OASIS amqp-core-types-v1.0-Pt1) fetching...
-[relaton-oasis] (OASIS amqp-core-types-v1.0-Pt1) found `OASIS amqp-core-types-v1.0-Pt1`
+[relaton-oasis] (OASIS amqp-core-types-v1.0-Pt1) Fetching from Relaton repository ...
+[relaton-oasis] (OASIS amqp-core-types-v1.0-Pt1) Found: `OASIS amqp-core-types-v1.0-Pt1`
 => #<RelatonOasis::OasisBibliographicItem:0x00007fceda0c5e08
 ...
 

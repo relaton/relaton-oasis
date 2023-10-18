@@ -13,9 +13,9 @@ RSpec.describe RelatonOasis do
     expect(hash.size).to eq 32
   end
 
-  it "get document" do
-    VCR.use_cassette "oasis_bib" do
-      item = RelatonOasis::OasisBibliography.get "AkomaNtosoCore-v1.0-Pt1-Vocabulary"
+  it "get document", vcr: "oasis_bib" do
+    expect do
+      item = RelatonOasis::OasisBibliography.get "OASIS AkomaNtosoCore-v1.0-Pt1-Vocabulary"
       xml = item.to_xml(bibdata: true)
       file = "spec/fixtures/document.xml"
       File.write file, xml, encoding: "UTF-8" unless File.exist? file
@@ -25,13 +25,16 @@ RSpec.describe RelatonOasis do
       schema = Jing.new "grammars/relaton-oasis-compile.rng"
       errors = schema.validate file
       expect(errors).to eq []
-    end
+    end.to output(
+      include("Fetching from Relaton repository",
+              "Found: `OASIS AkomaNtosoCore-v1.0-Pt1-Vocabulary`"),
+    ).to_stderr
   end
 
   it "not found" do
     expect do
       resp = RelatonOasis::OasisBibliography.get "invalid"
       expect(resp).to be_nil
-    end.to output(/not found/).to_stderr
+    end.to output(/\[relaton-oasis\] \(invalid\) Not found\./).to_stderr
   end
 end

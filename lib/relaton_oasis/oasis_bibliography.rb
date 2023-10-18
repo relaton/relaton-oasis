@@ -9,9 +9,11 @@ module RelatonOasis
     class << self
       # @param text [String]
       # @return [RelatonOasis::HitCollection]
-      def search(text, _year = nil)
+      def search(text, _year = nil) # rubocop:disable Metrics/AbcSize,Metrics/MethodLength
         /^(?:OASIS\s)?(?<code>.+)/ =~ text
-        index = Relaton::Index.find_or_create :oasis, url: "#{ENDPOINT}index-v1.zip", file: INDEX_FILE
+        index = Relaton::Index.find_or_create(
+          :oasis, url: "#{ENDPOINT}index-v1.zip", file: INDEX_FILE
+        )
         row = index.search(code).min_by { |i| i[:id] }
         return unless row
 
@@ -34,13 +36,13 @@ module RelatonOasis
       #   reference is required
       # @return [RelatonOasis::OasisBibliographicItem, nil]
       def get(code, year = nil, _opts = {}) # rubocop:disable Metrics/CyclomaticComplexity,Metrics/MethodLength,Metrics/PerceivedComplexity
-        Util.warn "(#{code}) fetching..."
+        Util.warn "(#{code}) Fetching from Relaton repository ..."
         bibitem = search code, year
         if bibitem
           docid = bibitem.docidentifier.detect(&:primary).id
-          Util.warn "(#{code}) found `#{docid}`"
+          Util.warn "(#{code}) Found: `#{docid}`"
         else
-          Util.warn "(#{code}) not found"
+          Util.warn "(#{code}) Not found."
         end
         bibitem
       end

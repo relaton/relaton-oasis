@@ -49,7 +49,8 @@ describe RelatonOasis::Index do
       file = double "file"
       expect(file).to receive(:puts).with("---\n")
       expect(file).to receive(:puts).with("- id: '123'\n  title: 'title'\n  file: 'file'\n")
-      expect(File).to receive(:open).with("index.yaml", "w:UTF-8").and_yield(file)
+      expect(File).to receive(:open).with("index.yaml",
+                                          "w:UTF-8").and_yield(file)
       subject.save
     end
 
@@ -60,8 +61,10 @@ describe RelatonOasis::Index do
     end
 
     it "read from file" do
-      expect(File).to receive(:exist?).with("index.yaml").and_return(false, true)
-      expect(YAML).to receive(:load_file).with("index.yaml", symbolize_names: true)
+      expect(File).to receive(:exist?).with("index.yaml").and_return(false,
+                                                                     true)
+      expect(YAML).to receive(:load_file).with("index.yaml",
+                                               symbolize_names: true)
         .and_return("index")
       subject.read
       expect(subject.instance_variable_get(:@index)).to eq "index"
