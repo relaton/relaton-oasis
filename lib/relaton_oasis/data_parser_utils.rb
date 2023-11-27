@@ -150,16 +150,17 @@ module RelatonOasis
     #
     # Parse document type.
     #
-    # @return [String] document type
+    # @return [RelatonOasis::DocumentType] document type
     #
     def parse_doctype
-      case text
-      when /OASIS Project Specification/, /Committee Specification/
-        "specification"
-      when /Technical Memorandum/ then "memorandum"
-      when /Technical Resolution/ then "resolution"
-      else "standard"
-      end
+      type =  case text
+              when /OASIS Project Specification/, /Committee Specification/
+                "specification"
+              when /Technical Memorandum/ then "memorandum"
+              when /Technical Resolution/ then "resolution"
+              else "standard"
+              end
+      DocumentType.new(type: type)
     end
 
     #

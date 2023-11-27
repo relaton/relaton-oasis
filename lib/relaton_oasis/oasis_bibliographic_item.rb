@@ -53,11 +53,11 @@ module RelatonOasis
     #
     # @return [String] XML representation of bibliographic item
     #
-    def to_xml(**opts)
+    def to_xml(**opts) # rubocop:disable Metrics/AbcSize,Metrics/CyclomaticComplexity
       super(**opts) do |b|
         if opts[:bibdata] && technology_area.any?
           ext = b.ext do
-            b.doctype doctype if doctype
+            doctype&.to_xml b
             editorialgroup&.to_xml b
             technology_area.each { |ta| b.send :"technology-area", ta }
           end

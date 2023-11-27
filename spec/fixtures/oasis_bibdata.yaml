@@ -1,5 +1,5 @@
 ---
-schema-version: v1.2.4
+schema-version: v1.2.5
 id: OASISamqp-core
 title:
 - content: Advanced Message Queueing Protocol (AMQP) v1.0
@@ -184,7 +184,8 @@ relation:
     formattedref:
       content: OASIS amqp-core-overview-v1.0-Pt0
       format: text/plain
-    doctype: standard
+    doctype:
+      type: standard
     editorialgroup:
     - name: OASIS Advanced Message Queuing Protocol (AMQP) TC
 - type: hasPart
@@ -192,7 +193,8 @@ relation:
     formattedref:
       content: OASIS amqp-core-types-v1.0-Pt1
       format: text/plain
-    doctype: standard
+    doctype:
+      type: standard
     editorialgroup:
     - name: OASIS Advanced Message Queuing Protocol (AMQP) TC
 - type: hasPart
@@ -200,7 +202,8 @@ relation:
     formattedref:
       content: OASIS amqp-core-transport-v1.0-Pt2
       format: text/plain
-    doctype: standard
+    doctype:
+      type: standard
     editorialgroup:
     - name: OASIS Advanced Message Queuing Protocol (AMQP) TC
 - type: hasPart
@@ -208,7 +211,8 @@ relation:
     formattedref:
       content: OASIS amqp-core-messaging-v1.0-Pt3
       format: text/plain
-    doctype: standard
+    doctype:
+      type: standard
     editorialgroup:
     - name: OASIS Advanced Message Queuing Protocol (AMQP) TC
 - type: hasPart
@@ -216,7 +220,8 @@ relation:
     formattedref:
       content: OASIS amqp-core-transactions-v1.0-Pt4
       format: text/plain
-    doctype: standard
+    doctype:
+      type: standard
     editorialgroup:
     - name: OASIS Advanced Message Queuing Protocol (AMQP) TC
 - type: hasPart
@@ -224,10 +229,12 @@ relation:
     formattedref:
       content: OASIS amqp-core-security-v1.0-Pt5
       format: text/plain
-    doctype: standard
+    doctype:
+      type: standard
     editorialgroup:
     - name: OASIS Advanced Message Queuing Protocol (AMQP) TC
-doctype: standard
+doctype:
+  type: standard
 editorialgroup:
 - name: OASIS Advanced Message Queuing Protocol (AMQP) TC
 ext:

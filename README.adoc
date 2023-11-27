@@ -62,7 +62,7 @@ item = RelatonOasis::OasisBibliography.get "OASIS amqp-core"
 [source,ruby]
 ----
 item.to_xml
-=> "<bibitem id="OASISamqp-core" type="standard" schema-version="v1.2.4">
+=> "<bibitem id="OASISamqp-core" type="standard" schema-version="v1.2.5">
       <fetched>2022-12-05</fetched>
       <title type="main" format="text/plain" language="en" script="Latn">Advanced Message Queueing Protocol (AMQP) v1.0</title>
       <docidentifier type="OASIS" primary="true">OASIS amqp-core</docidentifier>
@@ -75,7 +75,7 @@ With argument `bibdata: true` it ouputs XML wrapped by `bibdata` element and add
 [source,ruby]
 ----
 item.to_xml bibdata: true
-=> "<bibdata type="standard" schema-version="v1.2.4">
+=> "<bibdata type="standard" schema-version="v1.2.5">
       <fetched>2022-12-05</fetched>
       <title type="main" format="text/plain" language="en" script="Latn">Advanced Message Queueing Protocol (AMQP) v1.0</title>
       <docidentifier type="OASIS" primary="true">OASIS amqp-core</docidentifier>
@@ -121,7 +121,7 @@ RelatonOasis::XMLParser.from_xml File.read("spec/fixtures/oasis_bibdata.xml")
 [source,ruby]
 ----
 hash = YAML.load_file "spec/fixtures/oasis_bibdata.yaml"
-=> {"schema-version"=>"v1.2.4",
+=> {"schema-version"=>"v1.2.5",
  "id"=>"OASISamqp-core",
 ...
 

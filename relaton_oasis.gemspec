@@ -33,7 +33,7 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency "mechanize", "~> 2.8.0"
   spec.add_dependency "multi_json", "~> 1.15.0"
-  spec.add_dependency "relaton-bib", "~> 1.16.0"
+  spec.add_dependency "relaton-bib", "~> 1.17.0"
   spec.add_dependency "relaton-index", "~> 0.2.0"
 
   # For more information and examples about making a new gem, checkout our

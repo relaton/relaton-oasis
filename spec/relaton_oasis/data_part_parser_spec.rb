@@ -54,7 +54,8 @@ describe RelatonOasis::DataPartParser do
       EOHTML
       parser = RelatonOasis::DataPartParser.new doc.at("//p")
       doctype = parser.parse_doctype
-      expect(doctype).to eq "specification"
+      expect(doctype).to be_instance_of RelatonOasis::DocumentType
+      expect(doctype.type).to eq "specification"
     end
 
     it "when doctype is Memorandum" do
@@ -67,7 +68,7 @@ describe RelatonOasis::DataPartParser do
       EOHTML
       parser = RelatonOasis::DataPartParser.new doc.at("//p")
       doctype = parser.parse_doctype
-      expect(doctype).to eq "memorandum"
+      expect(doctype.type).to eq "memorandum"
     end
 
     it "when doctype is Resolution" do
@@ -80,12 +81,12 @@ describe RelatonOasis::DataPartParser do
       EOHTML
       parser = RelatonOasis::DataPartParser.new doc.at("//p")
       doctype = parser.parse_doctype
-      expect(doctype).to eq "resolution"
+      expect(doctype.type).to eq "resolution"
     end
 
     it "when doctype is not present" do
       doctype = subject.parse_doctype
-      expect(doctype).to eq "standard"
+      expect(doctype.type).to eq "standard"
     end
   end
 
