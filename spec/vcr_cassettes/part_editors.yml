@@ -12,11 +12,13 @@ http_interactions:
       Accept:
       - "*/*"
       User-Agent:
-      - Mechanize/2.9.1 Ruby/3.2.0p0 (http://github.com/sparklemotion/mechanize/)
+      - Mechanize/2.8.5 Ruby/3.2.0p0 (http://github.com/sparklemotion/mechanize/)
       Accept-Charset:
       - ISO-8859-1,utf-8;q=0.7,*;q=0.7
       Accept-Language:
       - en-us,en;q=0.5
+      Host:
+      - docs.oasis-open.org
       Connection:
       - keep-alive
       Keep-Alive:
@@ -35,7 +37,7 @@ http_interactions:
       Content-Encoding:
       - gzip
       Date:
-      - Thu, 23 Nov 2023 17:45:43 GMT
+      - Wed, 03 Jan 2024 05:02:52 GMT
       Etag:
       - '"4cd34c2fa0000"'
       Connection:
@@ -335,5 +337,5 @@ http_interactions:
         T7V2hkPUeNoAYobDHS3L25s35xNPS93cMoPJhwJYpX8vaAJgBax7/lxgQ6pM
         /qFQKUQ0Uu+f4uug1cYga7YYBYULPcS8NyiJmKHoHiuSR+dYVdHnapNRyEbZ
         YPwTH3SlA6VLCuhk6JoLPGkKIC/e/D+Du6BOt/AAAA==
-  recorded_at: Thu, 23 Nov 2023 17:45:43 GMT
+  recorded_at: Wed, 03 Jan 2024 05:02:52 GMT
 recorded_with: VCR 6.2.0
