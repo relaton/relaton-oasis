@@ -165,14 +165,17 @@ module RelatonOasis
 
     #
     # Parse document number.
+    # If the docuemnt has no parts, the document number is constructed from the title.
+    # If the document had one part, the document number is constructed from the part.
+    # If the document has parts, the document number is constructed from the parts.
     #
     # @return [String] document number
     #
     def parse_docnumber
       parts = document_part_refs
       case parts.size
-      when 0 then title_to_docid @node.at("./summary/div/h2").text
-      when 1 then parse_spec(parts[0])
+      when 0 then parse_spec title_to_docid(@node.at("./summary/div/h2").text)
+      when 1 then parse_part parse_spec(parts[0])
       else parts_to_docid parts
       end
     end
@@ -194,7 +197,7 @@ module RelatonOasis
           end
         end
       end.join("-")
-      parse_spec(id)
+      parse_part parse_spec(id)
     end
 
     #

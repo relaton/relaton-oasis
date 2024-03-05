@@ -8,6 +8,11 @@ describe RelatonOasis::DataParser do
     Nokogiri::HTML(html).at("//details")
   end
 
+  let(:csaf_v20) do
+    html = File.read("spec/fixtures/csaf-v20.html", encoding: "UTF-8")
+    Nokogiri::HTML(html).at("//details")
+  end
+
   subject { RelatonOasis::DataParser.new(node.at("//details")) }
 
   it "parse", vcr: "amqp-v10" do
@@ -173,6 +178,12 @@ describe RelatonOasis::DataParser do
           dociid = parser.parse_docid
           expect(dociid[0].id).to eq "OASIS ebXML-MSS-v2.0"
         end
+      end
+
+      it "csaf-v20" do
+        parser = RelatonOasis::DataParser.new csaf_v20
+        docid = parser.parse_docid
+        expect(docid[0].id).to eq "OASIS csaf-v2.0-CS02"
       end
     end
   end

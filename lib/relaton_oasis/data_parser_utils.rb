@@ -34,10 +34,28 @@ module RelatonOasis
       if link_node && link_node[:href].match?(/\.html$/)
         agent = Mechanize.new
         agent.agent.allowed_error_codes = [404]
-        sleep 1 # to avoid 429 error
-        resp = agent.get link_node[:href]
-        @page = resp if resp.code == "200"
+        resp = retry_page(link_node[:href], agent)
+        @page = resp if resp && resp.code == "200"
       end
+    end
+
+    #
+    # Retry to get page.
+    #
+    # @param [String] url page URL
+    # @param [Mechanize] agent HTTP client
+    # @param [Integer] retries number of retries
+    #
+    # @return [Mechanize::Page, nil] page or nil
+    #
+    def retry_page(url, agent, retries = 3)
+      sleep 1 # to avoid 429 error
+      agent.get url
+    rescue Errno::ETIMEDOUT, Net::OpenTimeout => e
+      retry if (retries -= 1).positive?
+      Util.error "Failed to get page `#{url}`"
+      Util.error e.message
+      nil
     end
 
     def parse_chairs
@@ -96,12 +114,11 @@ module RelatonOasis
     # @return [String] document identifier with specification if needed
     #
     def parse_spec(num)
-      id = case text
-           when /OASIS Project Specification (\d+)/ then "#{num}-PS#{$1}"
-           when /Committee Specification (\d+)/ then "#{num}-CS#{$1}"
-           else num
-           end
-      parse_part(id)
+      case text
+      when /OASIS Project Specification (\d+)/ then "#{num}-PS#{$1}"
+      when /Committee Specification (\d+)/ then "#{num}-CS#{$1}"
+      else num
+      end
     end
 
     #
@@ -169,9 +186,9 @@ module RelatonOasis
     # @return [Array<String>] technology areas
     #
     def parse_technology_area(node)
-      node.xpath(
-        "./summary/div/div/ul[@class='technology-areas__list']/li/a",
-      ).map { |ta| ta.text.strip.gsub(/\s/, "-") }
+      node.xpath("./summary/div/div/ul[@class='technology-areas__list']/li/a").map do |ta|
+        ta.text.strip.gsub(/\s/, "-").sub("development", "Development")
+      end
     end
   end
 end

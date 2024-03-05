@@ -13,9 +13,15 @@ module RelatonOasis
     end
 
     def text
-      @text ||= @node.xpath(
-        "./strong/following-sibling::text()|./span/strong/../following-sibling::text()",
-      ).text.strip
+      return @text if @text
+
+      if @node.at("./strong/following-sibling::text()|./span[strong]/following-sibling::text()")
+        @text = @node.xpath(
+          "./strong/following-sibling::node()|./span[strong]/following-sibling::node()",
+        ).text.strip
+      else
+        @text = @node.xpath("./following-sibling::p[1][em]").text.strip
+      end
     end
 
     def title
@@ -72,7 +78,7 @@ module RelatonOasis
       id = parse_errata(num)
       # some part references need to be added by "Pt" to be distinguishable from root doc
       id += "-Pt" if %w[CMIS-v1.1 DocBook-5.0 XACML-V3.0 mqtt-v3.1.1 OData-JSON-Format-v4.0].include?(id)
-      parse_spec id
+      parse_part parse_spec id
     end
 
     #
@@ -81,8 +87,7 @@ module RelatonOasis
     # @return [Array<RelatonBib::TypedTitleString>] link
     #
     def parse_link
-      l = @node.at("./a")
-      [RelatonBib::TypedUri.new(type: "src", content: l[:href])]
+      [RelatonBib::TypedUri.new(type: "src", content: link_node[:href])]
     end
 
     #
@@ -139,7 +144,7 @@ module RelatonOasis
     end
 
     def link_node
-      @link_node = @node.at("./a")
+      @link_node = @node.at("./a|./following-sibling::p[1]/a")
     end
 
     #

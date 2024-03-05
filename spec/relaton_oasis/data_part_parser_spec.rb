@@ -5,6 +5,61 @@ describe RelatonOasis::DataPartParser do
 
   subject { RelatonOasis::DataPartParser.new doc.at("//div[contains(@class, 'standard__grid--cite-as')]/p") }
 
+  context "#text" do
+    context "from current paragraph" do
+      it "with strong" do
+        node = Nokogiri::HTML::DocumentFragment.parse(
+          "<p>Cite as: <br><strong>[amqp-core-overview-v1.0]</strong><br>" \
+          "<em>OASIS Advanced Message Queuing Protocol (AMQP) Version 1.0 " \
+          "Part 0: Overview</em>. Edited by Robert Godfrey, David Ingham, " \
+          "and Rafael Schloming. 29 October 2012. OASIS Standard. " \
+          "<a href=\"http://docs.oasis-open.org/amqp/core/v1.0/os/amqp-core-overview-v1.0-os.html\">" \
+          "http://docs.oasis-open.org/amqp/core/v1.0/os/amqp-core-overview-v1.0-os.html</a>. " \
+          "Latest version: <a href=\"http://docs.oasis-open.org/amqp/core/v1.0/amqp-core-overview-v1.0.html\">" \
+          "http://docs.oasis-open.org/amqp/core/v1.0/amqp-core-overview-v1.0.html</a>. </p>",
+        ).at("p")
+        expect(described_class.new(node).text).to include(
+          "OASIS Advanced Message Queuing Protocol (AMQP) Version 1.0 Part 0: " \
+          "Overview. Edited by Robert Godfrey, David Ingham, and Rafael " \
+          "Schloming. 29 October 2012. OASIS Standard.",
+        )
+      end
+
+      it "with span" do
+        node = Nokogiri::HTML::DocumentFragment.parse(
+          "<p><span class=\"citationLabel\"><strong>[OSLC-AM-3.0-Part1]</strong></span><br>" \
+          "<span class=\"citationTitle\">OSLC Architecture Management Version 3.0. Part 1: Specification</span>" \
+          ". Edited by Jim Amsden. 30 September 2021. OASIS Project Specification 01.&nbsp;" \
+          "<a class=\"u-url\" href=\"https://docs.oasis-open-projects.org/oslc-op/am/v3.0/ps01/architecture-management-spec.html\">" \
+          "https://docs.oasis-open-projects.org/oslc-op/am/v3.0/ps01/architecture-management-spec.html</a>" \
+          ". Latest stage:&nbsp;<a href=\"https://docs.oasis-open-projects.org/oslc-op/am/v3.0/architecture-management-spec.html\">" \
+          "https://docs.oasis-open-projects.org/oslc-op/am/v3.0/architecture-management-spec.html</a>.</p>",
+        ).at("p")
+        expect(described_class.new(node).text).to include(
+          "OSLC Architecture Management Version 3.0. Part 1: Specification. " \
+          "Edited by Jim Amsden. 30 September 2021. OASIS Project Specification 01.",
+        )
+      end
+    end
+
+    it "from next paragraph" do
+      node = Nokogiri::HTML::DocumentFragment.parse(
+        "<p><strong>[csaf-v2.0]</strong></p>" \
+        "<p><em>Common Security Advisory Framework Version 2.0</em>" \
+        ". Edited by Langley Rock, Stefan Hagen, and Thomas Schmidt. 12 November 2021. " \
+        "OASIS Committee Specification 01.&nbsp;" \
+        "<a href=\"https://docs.oasis-open.org/csaf/csaf/v2.0/cs01/csaf-v2.0-cs01.html\">" \
+        "https://docs.oasis-open.org/csaf/csaf/v2.0/cs01/csaf-v2.0-cs01.html</a>" \
+        ". Latest stage:&nbsp;<a href=\"https://docs.oasis-open.org/csaf/csaf/v2.0/csaf-v2.0.html\">" \
+        "https://docs.oasis-open.org/csaf/csaf/v2.0/csaf-v2.0.html</a>.</p>",
+      ).at("p")
+      expect(described_class.new(node).text).to include(
+        "Common Security Advisory Framework Version 2.0. Edited by Langley Rock, " \
+        "Stefan Hagen, and Thomas Schmidt. 12 November 2021. OASIS Committee Specification 01.",
+      )
+    end
+  end
+
   context "#title" do
     it "with title in span" do
       doc = Nokogiri::HTML <<-EOHTML
@@ -41,6 +96,23 @@ describe RelatonOasis::DataPartParser do
     expect(subject).to receive(:parse_contributor)
     expect(RelatonOasis::OasisBibliographicItem).to receive(:new)
     subject.parse
+  end
+
+  context "#parse_docnumber" do
+    it do
+      node = Nokogiri::HTML::DocumentFragment.parse(
+        "<p><strong>[OpenDocument-v1.3-part1]</strong>  <br>" \
+        "<em>Open Document Format for Office Applications (OpenDocument) Version 1.3. Part 1: Introduction</em>. " \
+        "Edited by Francis Cave, Patrick Durusau, Svante Schubert and Michael Stahl. 30 October 2020. " \
+        "OASIS Committee Specification 02.&nbsp;" \
+        "<a href=\"https://docs.oasis-open.org/office/OpenDocument/v1.3/cs02/part1-introduction/OpenDocument-v1.3-cs02-part1-introduction.html\">" \
+        "https://docs.oasis-open.org/office/OpenDocument/v1.3/cs02/part1-introduction/OpenDocument-v1.3-cs02-part1-introduction.html</a>. " \
+        "Latest stage:&nbsp;<a href=\"https://docs.oasis-open.org/office/OpenDocument/v1.3/OpenDocument-v1.3-part1-introduction.html\">" \
+        "https://docs.oasis-open.org/office/OpenDocument/v1.3/OpenDocument-v1.3-part1-introduction.html</a>.</p>",
+      ).at("p")
+      parser = described_class.new(node)
+      expect(parser.parse_docnumber).to eq "OpenDocument-v1.3-part1-CS02"
+    end
   end
 
   context "parse doctype" do
