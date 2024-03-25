@@ -28,13 +28,13 @@ RSpec.describe RelatonOasis do
     end.to output(
       include("Fetching from Relaton repository",
               "Found: `OASIS AkomaNtosoCore-v1.0-Pt1-Vocabulary`"),
-    ).to_stderr
+    ).to_stderr_from_any_process
   end
 
   it "not found" do
     expect do
       resp = RelatonOasis::OasisBibliography.get "invalid"
       expect(resp).to be_nil
-    end.to output(/\[relaton-oasis\] \(invalid\) Not found\./).to_stderr
+    end.to output(/\[relaton-oasis\] INFO: \(invalid\) Not found\./).to_stderr_from_any_process
   end
 end

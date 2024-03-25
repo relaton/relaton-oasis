@@ -17,8 +17,8 @@ module RelatonOasis
       uta = @technology_area.reject { |a| AREAS.include? a }
       if uta.any?
         area = uta.size > 1 ? "areas" : "area"
-        Util.warn "WARNING Unknown technology #{area}: `#{uta.join('`, `')}`"
-        Util.warn "Valid values are: `#{AREAS.join('`, `')}`"
+        Util.warn "Unknown technology #{area}: `#{uta.join('`, `')}`\n" \
+          "Valid values are: `#{AREAS.join('`, `')}`"
       end
       super
     end

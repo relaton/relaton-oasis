@@ -73,7 +73,7 @@ module RelatonOasis
           end
       file = file_name doc
       if @files.include? file
-        warn "File #{file} already exists. Document: #{doc.docnumber}"
+        Util.warn "File #{file} already exists. Document: #{doc.docnumber}"
       else
         @files << file
         @index[doc] = file

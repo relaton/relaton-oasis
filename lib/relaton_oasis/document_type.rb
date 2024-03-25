@@ -1,6 +1,6 @@
 module RelatonOasis
   class DocumentType < RelatonBib::DocumentType
-    DCTYPES = %w[specification memorandum resolution standard].freeze
+    DOCTYPES = %w[specification memorandum resolution standard].freeze
 
     def initialize(type:, abbreviation: nil)
       chceck_type type
@@ -8,8 +8,8 @@ module RelatonOasis
     end
 
     def chceck_type(type)
-      unless DCTYPES.include? type
-        Util.warn "WARNING: invalid doctype: `#{type}`"
+      unless DOCTYPES.include? type
+        Util.warn "invalid doctype: `#{type}`"
       end
     end
   end
