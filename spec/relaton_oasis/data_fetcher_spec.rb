@@ -88,7 +88,7 @@ describe RelatonOasis::DataFetcher do
       expect(index1).to receive(:add_or_update).with("docnumber", "file")
       expect do
         subject.save_doc doc
-      end.to output(/File file already exists/).to_stderr
+      end.to output(/File file already exists/).to_stderr_from_any_process
     end
   end
 

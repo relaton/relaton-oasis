@@ -23,7 +23,7 @@ module RelatonOasis
       end
       new file
     rescue StandardError => e
-      warn "Failed to fetch index: #{e.message}"
+      Util.error "Failed to fetch index: #{e.message}"
     end
 
     #

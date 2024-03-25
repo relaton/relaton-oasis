@@ -1,9 +1,6 @@
 module RelatonOasis
   module Util
     extend RelatonBib::Util
-
-    def self.logger
-      RelatonOasis.configuration.logger
-    end
+    PROGNAME = "relaton-oasis".freeze
   end
 end
