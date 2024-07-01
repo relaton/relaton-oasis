@@ -31,7 +31,7 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{\Aexe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
 
-  spec.add_dependency "mechanize", "~> 2.8.0"
+  spec.add_dependency "mechanize", "~> 2.10"
   spec.add_dependency "multi_json", "~> 1.15.0"
   spec.add_dependency "relaton-bib", "~> 1.18.0"
   spec.add_dependency "relaton-index", "~> 0.2.0"
