@@ -1,4 +1,4 @@
-= RelatonBipm: retrieve OASIS Standards for bibliographic use using the BibliographicItem model
+= RelatonOasis: retrieve OASIS Standards for bibliographic use using the BibliographicItem model
 
 image:https://img.shields.io/gem/v/relaton-oasis.svg["Gem Version", link="https://rubygems.org/gems/relaton-oasis"]
 image:https://github.com/relaton/relaton-oasis/workflows/macos/badge.svg["Build Status (macOS)", link="https://github.com/relaton/relaton-oasis/actions?workflow=macos"]
@@ -30,26 +30,15 @@ Or install it yourself as:
 
 == Usage
 
-=== Configuration
-
-Configuration is optional. The available option is `logger` which is a `Logger` instance. By default, the logger is `Logger.new($stderr)` with `Logger::WARN` level. To change the logger level, use `RelatonOasis.configure` block.
-
-[source,ruby]
-----
-require 'relaton_oasis'
-=> true
-
-RelatonOasis.configure do |config|
-  config.logger.level = Logger::DEBUG
-end
-----
-
 === Get standard using reference.
 
 All the OASIS documents are parsed from https://www.oasis-open.org/standards/ and stored in a GitHub repository https://github.com/relaton/relaton-data-oasis. You can find all possible references on the index page https://relaton.github.io/relaton-data-oasis/.
 
 [source,ruby]
 ----
+require 'relaton_oasis'
+=> true
+
 item = RelatonOasis::OasisBibliography.get "OASIS amqp-core"
 [relaton-oasis] (OASIS) amqp-core Fetching from Relaton repository ...
 [relaton-oasis] (OASIS amqp-core) Found: `OASIS amqp-core`
@@ -149,6 +138,10 @@ Stopped at: 2022-03-18 18:34:12 +0100
 Done in: 5 sec.
 => nil
 ----
+
+=== Logging
+
+RelatonOasis uses the relaton-logger gem for logging. By default, it logs to STDOUT. To change the log levels and add other loggers, read the https://github.com/relaton/relaton-logger#usage[relaton-logger] documentation.
 
 == Development
 
