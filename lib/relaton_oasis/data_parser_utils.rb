@@ -53,8 +53,7 @@ module RelatonOasis
       agent.get url
     rescue Errno::ETIMEDOUT, Net::OpenTimeout => e
       retry if (retries -= 1).positive?
-      Util.error "Failed to get page `#{url}`"
-      Util.error e.message
+      Util.error "Failed to get page `#{url}`\n#{e.message}"
       nil
     end
 
