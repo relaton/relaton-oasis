@@ -74,8 +74,12 @@ module RelatonOasis
     #
     def to_hash(embedded: false)
       hash = super
-      hash["technology_area"] = technology_area if technology_area.any?
+      hash["ext"]["technology_area"] = technology_area if technology_area.any?
       hash
+    end
+
+    def has_ext?
+      super || technology_area.any?
     end
 
     #

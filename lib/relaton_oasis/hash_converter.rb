@@ -5,6 +5,12 @@ module RelatonOasis
 
     @@acronyms = nil
 
+    def hash_to_bib(hash)
+      ret = super
+      ret[:technology_area] = ret[:ext][:technology_area] if ret.dig(:ext, :technology_area)
+      ret
+    end
+
     private
 
     # @param item_hash [Hash]

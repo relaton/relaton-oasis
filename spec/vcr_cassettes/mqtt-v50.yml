@@ -12,9 +12,7 @@ http_interactions:
       Accept:
       - "*/*"
       User-Agent:
-      - Mechanize/2.10.1 Ruby/3.3.3p89 (http://github.com/sparklemotion/mechanize/)
-      Accept-Charset:
-      - ISO-8859-1,utf-8;q=0.7,*;q=0.7
+      - Mechanize/2.12.2 Ruby/3.3.3p89 (http://github.com/sparklemotion/mechanize/)
       Accept-Language:
       - en-us,en;q=0.5
       Host:
@@ -37,7 +35,7 @@ http_interactions:
       Content-Encoding:
       - gzip
       Date:
-      - Mon, 01 Jul 2024 23:40:04 GMT
+      - Wed, 11 Dec 2024 03:21:29 GMT
       Transfer-Encoding:
       - chunked
       Etag:
@@ -3323,5 +3321,5 @@ http_interactions:
         aF0xKPbz6yYTwRUf+xmIo0kibCHDRFHxMp57BpCjxBKvCE6k0EOaQWdkGozD
         FEewcip7nHCFCfUEqREa7u5lmOWXfupfp/7sxnaTXbxFJag18sJvhsl4IT/e
         5NMIfvz/AaiRGvQS5xUA
-  recorded_at: Mon, 01 Jul 2024 23:40:04 GMT
-recorded_with: VCR 6.2.0
+  recorded_at: Wed, 11 Dec 2024 03:21:30 GMT
+recorded_with: VCR 6.3.1
