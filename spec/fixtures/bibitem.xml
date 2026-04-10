@@ -1,4 +1,4 @@
-<bibdata type="standard" schema-version="v1.5.6">
+<bibitem id="OASISamqpcore" type="standard" schema-version="v1.5.6">
   <title language="en" script="Latn" type="main">Advanced Message Queueing Protocol (AMQP) v1.0</title>
   <docidentifier type="OASIS" primary="true">OASIS amqp-core</docidentifier>
   <docnumber>amqp-core</docnumber>
@@ -12,7 +12,7 @@
     <role type="publisher"/>
     <organization>
       <name>OASIS</name>
-      <uri type="uri">https://www.oasis-open.org/</uri>
+      <uri>https://www.oasis-open.org/</uri>
     </organization>
   </contributor>
   <contributor>
@@ -21,18 +21,7 @@
     </role>
     <organization>
       <name>OASIS Advanced Message Queuing Protocol (AMQP) TC</name>
-      <uri type="uri">http://www.oasis-open.org/committees/amqp/</uri>
-    </organization>
-  </contributor>
-  <contributor>
-    <role type="author">
-      <description>committee</description>
-    </role>
-    <organization>
-      <name>OASIS</name>
-      <subdivision type="technical-committee">
-        <name>OASIS Advanced Message Queuing Protocol (AMQP) TC</name>
-      </subdivision>
+      <uri>http://www.oasis-open.org/committees/amqp/</uri>
     </organization>
   </contributor>
   <contributor>
@@ -47,7 +36,7 @@
       <affiliation>
         <organization>
           <name>Microsoft</name>
-          <uri type="uri">http://www.microsoft.com</uri>
+          <uri>http://www.microsoft.com</uri>
         </organization>
       </affiliation>
       <email>Ram.Jeyaraman@microsoft.com</email>
@@ -65,7 +54,7 @@
       <affiliation>
         <organization>
           <name>INETCO Systems</name>
-          <uri type="uri">http://www.inetco.com</uri>
+          <uri>http://www.inetco.com</uri>
         </organization>
       </affiliation>
       <email>angus.telfer@inetco.com</email>
@@ -81,7 +70,7 @@
       <affiliation>
         <organization>
           <name>JPMorgan Chase &amp; Co.</name>
-          <uri type="uri">http://www.jpmorganchase.com</uri>
+          <uri>http://www.jpmorganchase.com</uri>
         </organization>
       </affiliation>
       <email>robert.godfrey@jpmorgan.com</email>
@@ -97,7 +86,7 @@
       <affiliation>
         <organization>
           <name>Microsoft</name>
-          <uri type="uri">http://www.microsoft.com</uri>
+          <uri>http://www.microsoft.com</uri>
         </organization>
       </affiliation>
       <email>David.Ingham@microsoft.com</email>
@@ -113,7 +102,7 @@
       <affiliation>
         <organization>
           <name>Red Hat</name>
-          <uri type="uri">http://www.redhat.com</uri>
+          <uri>http://www.redhat.com</uri>
         </organization>
       </affiliation>
       <email>rafaels@redhat.com</email>
@@ -152,9 +141,4 @@
       <formattedref>OASIS amqp-core-security-v1.0-Pt5</formattedref>
     </bibitem>
   </relation>
-  <ext schema-version="v1.0.4">
-    <doctype>standard</doctype>
-    <flavor>oasis</flavor>
-    <technology-area>Messaging</technology-area>
-  </ext>
-</bibdata>
+</bibitem>
