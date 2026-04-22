@@ -93,7 +93,25 @@ module RelatonOasis
     def contact(email)
       return [] unless email
 
-      [RelatonBib::Contact.new(type: "email", value: email[:href].split(":")[1])]
+      addr = email_address(email[:href])
+      return [] unless addr
+
+      [RelatonBib::Contact.new(type: "email", value: addr)]
+    end
+
+    def email_address(href)
+      if href.start_with?("mailto:")
+        href.split(":", 2)[1]
+      elsif href.include?("/cdn-cgi/l/email-protection#")
+        decode_cfemail(href.split("#", 2)[1])
+      end
+    end
+
+    # Decode Cloudflare email-obfuscation hex string: first byte is the XOR
+    # key, each subsequent byte XOR'd with the key yields one ASCII char.
+    def decode_cfemail(hex)
+      key = hex[0, 2].to_i(16)
+      hex[2..].scan(/../).map { |p| (p.to_i(16) ^ key).chr }.join
     end
 
     def affiliation(org)
