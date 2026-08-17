@@ -12,7 +12,7 @@ Gem::Specification.new do |spec|
                        "bibliographic use using the BibliographicItem model"
   spec.description   = "RelatonOasis: retrieve OASIS Standards for " \
                        "bibliographic use using the BibliographicItem model"
-  spec.homepage      = "https://github.com/metanorma/relaton-oasis"
+  spec.homepage      = "https://github.com/relaton/relaton-oasis"
   spec.license       = "BSD-2-Clause"
   spec.required_ruby_version = ">= 2.7.0"
 
