@@ -8,7 +8,7 @@ gemspec
 gem "rake", "~> 13.0"
 gem "rspec", "~> 3.0"
 
-gem "equivalent-xml", "~> 0.6"
+gem "canon", "~> 0.3"
 gem "pry-byebug"
 gem "rubocop", "~> 1.7"
 gem "rubocop-performance"
